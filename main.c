@@ -1,62 +1,61 @@
-/*æ‘†è„±æ— èŠçš„å°è¯•*/
+/*°ÚÍÑÎŞÁÄµÄ³¢ÊÔ*/
 
-///æ¸¸æˆ2048å·¥ä½œå°
-///ç¨‹åºæ­¥éª¤
-///1.æ‰“å°ç•Œé¢ï¼ˆæ¯æ¬¡æ‰“å°è¦æœ‰åˆ·æ–°ï¼‰
-///2.åˆå§‹åŒ–å˜é‡
-///3.é”®å…¥æ–¹å‘é”®
-///4.å¯¹åº”æ“ä½œ
-///5.éšæœºä½ç½®ç”Ÿæˆæ–°æ•°
-///6.è®°åˆ†æ•°
-///7.åˆ¤æ–­æ¸¸æˆæ˜¯å¦ç»“æŸï¼ˆæ˜¯ï¼šç»“æŸï¼›å¦ï¼šå›åˆ°3ï¼‰
+///ÓÎÏ·2048¹¤×÷Ì¨
+///³ÌĞò²½Öè
+///1.´òÓ¡½çÃæ£¨Ã¿´Î´òÓ¡ÒªÓĞË¢ĞÂ£©
+///2.³õÊ¼»¯±äÁ¿
+///3.¼üÈë·½Ïò¼ü
+///4.¶ÔÓ¦²Ù×÷
+///5.Ëæ»úÎ»ÖÃÉú³ÉĞÂÊı
+///6.¼Ç·ÖÊı
+///7.ÅĞ¶ÏÓÎÏ·ÊÇ·ñ½áÊø£¨ÊÇ£º½áÊø£»·ñ£º»Øµ½3£©
 
-///åˆä½œæ–¹æ³•ï¼šå„è‡ªå®Œæˆéƒ¨åˆ†å‡½æ•°ï¼Œç»Ÿä¸€å˜é‡å‘½åï¼Œæ‹¿è‡ªå·±å–œæ¬¢ï¼ˆä¼šå†™çš„ï¼‰çš„éƒ¨åˆ†å†™
+///ºÏ×÷·½·¨£º¸÷×ÔÍê³É²¿·Öº¯Êı£¬Í³Ò»±äÁ¿ÃüÃû£¬ÄÃ×Ô¼ºÏ²»¶£¨»áĞ´µÄ£©µÄ²¿·ÖĞ´
 
-///ä»£ç æœ‰é—®é¢˜æ‰¾ç™¾åº¦ï¼Œæ‰¾åˆ·å­åŒå­¦ä¹Ÿè¡Œï¼Œä»–è‡ªå·±ä¹Ÿä¸ä¼šï¼Œä¸è¿‡å¯ä»¥å‘ç»™ä»–ç¡®è®¤ï¼ˆå˜²ç¬‘ï¼‰ä»–ä¸ä¼š
+///´úÂëÓĞÎÊÌâÕÒ°Ù¶È£¬ÕÒË¢×ÓÍ¬Ñ§Ò²ĞĞ£¬Ëû×Ô¼ºÒ²²»»á£¬²»¹ı¿ÉÒÔ·¢¸øËûÈ·ÈÏ£¨³°Ğ¦£©Ëû²»»á
 
 
 #include <stdio.h>
 #include <stdlib.h>
 #include<conio.h>
-#include<time.h> 
+#include<time.h>
 
-///å®šä¹‰å…¨å±€å˜é‡4*4ä¸ªï¼Œä»num[1][1]å¼€å§‹
+///¶¨ÒåÈ«¾Ö±äÁ¿4*4¸ö£¬´Ónum[1][1]¿ªÊ¼
 int num[5][5];
 int Line=4;
 int Col=4;
+int Score;
+///×Ô¶¨Òåº¯Êı ,³õ²½¶¨Òåº¯Êı¶¼Îªvoid£¬¿ÉÄÜºóĞøÓĞĞ©Òª±äÎªint
 
-///è‡ªå®šä¹‰å‡½æ•° ,åˆæ­¥å®šä¹‰å‡½æ•°éƒ½ä¸ºvoidï¼Œå¯èƒ½åç»­æœ‰äº›è¦å˜ä¸ºint
-
-/*æ‰“å°ç•Œé¢*/
+/*´òÓ¡½çÃæ*/
 void Print();
 
-/*åˆå§‹åŒ–å˜é‡*/
+/*³õÊ¼»¯±äÁ¿*/
 void Initial();
 
-/*é”®å…¥æ–¹å‘é”®*/
+/*¼üÈë·½Ïò¼ü*/
 void Control();
     void Turn_left();
     void Turn_right();
     void Turn_up();
     void Turn_down();
-    
-/*ç”Ÿæˆéšæœºæ•°*/
-///ç”¨rand()ç§å­
+
+/*Éú³ÉËæ»úÊı*/
+///ÓÃrand()ÖÖ×Ó
 void New_random();
 
-/*åˆ¤æ–­æ¸¸æˆæ˜¯å¦ç»“æŸ*/
+/*ÅĞ¶ÏÓÎÏ·ÊÇ·ñ½áÊø*/
 int Is_over();
 
 
-///mainå‡½æ•°ä½œä¸ºä¸»ä½“ï¼Œè§†å›¾è¦ä¸€ç›®äº†ç„¶ï¼Œä»£ç é‡ä¸è¦å¤ªå¤šï¼Œä¸»è¦ä½œç”¨æ˜¯å¼•å…¥è‡ªå®šä¹‰å‡½æ•°
+///mainº¯Êı×÷ÎªÖ÷Ìå£¬ÊÓÍ¼ÒªÒ»Ä¿ÁËÈ»£¬´úÂëÁ¿²»ÒªÌ«¶à£¬Ö÷Òª×÷ÓÃÊÇÒıÈë×Ô¶¨Òåº¯Êı
 int main()
 {
 	Initial();
-	New_random();//æ­¤å¤„ç…§æ¬åŸæ¸¸æˆï¼Œä½¿å¾—ä¸€å¼€å§‹ä¾¿å¯ç”Ÿæˆä¸¤ä¸ªéšæœºæ•° 
-	
-	int judge;
-	judge=1;
-	
+	New_random();//´Ë´¦ÕÕ°áÔ­ÓÎÏ·£¬Ê¹µÃÒ»¿ªÊ¼±ã¿ÉÉú³ÉÁ½¸öËæ»úÊı
+
+	int judge=1;
+
 	while(judge==1){
 		New_random();
 		Print();
@@ -64,14 +63,12 @@ int main()
 		if(judge==2||judge==0){
 			break;
 		}
-		Control();		
+		Control();
 	}
-	if(judge==2){
+	if(judge==2)
 		printf("%s","WIN");
-	}
-	else{
+	else
 		printf("%s","LOSE");
-	} 
     return 0;
 }
 
@@ -79,38 +76,38 @@ void Print(){
     system("cls");
     int i,j;
     ///Head
-    printf("â•”");
+    printf("¨X");
     for(j=1;j<=Col;j++){
-        printf("â•â•â•â•");
-        if(Col-j)   printf("â•¦");
+        printf("¨T¨T¨T¨T");
+        if(Col-j)   printf("¨j");
     }
-    printf("â•—\n");
+    printf("¨[\n");
     ///body
     for(i=1;i<=Line;i++){
         for(j=1;j<=Col;j++){
-            if(!num[i][j]){printf("â•‘    ");continue;}
-            printf("â•‘%4d",num[i][j]);
+            if(!num[i][j]){printf("¨U    ");continue;}
+            printf("¨U%4d",num[i][j]);
         }
-        printf("â•‘\n");
+        printf("¨U\n");
         if(i-Line){
         for(j=1;j<=Col;j++){
-            printf("â•‘â•â•â•â•");
+            printf("¨U¨T¨T¨T¨T");
         }
-        printf("â•‘\n");}
+        printf("¨U\n");}
     }
     ///foot
-    printf("â•š");
+    printf("¨^");
     for(j=1;j<=Col;j++){
-        printf("â•â•â•â•");
-        if(Col-j)   printf("â•©");
+        printf("¨T¨T¨T¨T");
+        if(Col-j)   printf("¨m");
     }
-    printf("â•");
+    printf("¨a");
 
 
 }
 
 
-///åˆå§‹åŒ–å˜é‡
+///³õÊ¼»¯±äÁ¿
 void Initial()
 {
 	int i,j;
@@ -120,38 +117,38 @@ void Initial()
 		}
 	}
 }
-///åˆå§‹åŒ–å®Œæˆ
-/*å…¶å®ï¼Œå…¨å±€å˜é‡å¦‚æœæ²¡æœ‰æ˜¾å¼åˆå§‹åŒ–çš„è¯ï¼Œä»£ç è¿è¡Œæ—¶ä¼šè¢«è‡ªåŠ¨åˆå§‹åŒ–ä¸º 0 */
+///³õÊ¼»¯Íê³É
+/*ÆäÊµ£¬È«¾Ö±äÁ¿Èç¹ûÃ»ÓĞÏÔÊ½³õÊ¼»¯µÄ»°£¬´úÂëÔËĞĞÊ±»á±»×Ô¶¯³õÊ¼»¯Îª 0 */
 
 
 ///function 'Control':
 void Control()
 {
 	char operation;
-	operation=getch();  /*é”®å…¥æ“ä½œ awsd;*/
+	operation=getch();  /*¼üÈë²Ù×÷ awsd;*/
 
 	switch(operation){
 
-		/*å‘å·¦*/
+		/*Ïò×ó*/
 		case 'a':
 		case 'A':
 			Turn_left();
 			break;
 
 
-		/*å‘å³*/
+		/*ÏòÓÒ*/
 		case 'd':
 		case 'D':
 		    Turn_right();
 		    break;
 
-		/*å‘ä¸Š*/
+		/*ÏòÉÏ*/
 		case 'w':
 		case 'W':
 			Turn_up();
 			break;
 
-		/*å‘ä¸‹*/
+		/*ÏòÏÂ*/
 		case 's':
 		case 'S':
 			Turn_down();
@@ -160,22 +157,22 @@ void Control()
 	}//end switch
 }
 ///end function 'Control';
-///ç§»åŠ¨æ“ä½œ
+///ÒÆ¶¯²Ù×÷
     void Turn_left(){
         int i,j,temp;
         for(i=1;i<=Line;i++){
             for(j=1;j<=Col;j++){
-                if(!num[i][j])for(temp=j+1;temp<=Col;temp++)if(num[i][temp]){num[i][j]=num[i][temp];num[i][temp]=0;}
+                if(!num[i][j])for(temp=j+1;temp<=Col;temp++)if(num[i][temp]){num[i][j]=num[i][temp];num[i][temp]=0;break;}
                 if(!num[i][j])continue;
-                for(temp=j+1;temp<=Col;temp++){     ///è®¾ç½®tempå¾ªç¯ä½œç”¨ï¼šé€ä¸ªtempä¸jæ¯”è¾ƒ
-                    if(!num[i][temp])continue;      ///ç©ºç™½å¤„ç†
+                for(temp=j+1;temp<=Col;temp++){     ///ÉèÖÃtempÑ­»·×÷ÓÃ£ºÖğ¸ötempÓëj±È½Ï
+                    if(!num[i][temp])continue;      ///¿Õ°×´¦Àí
                     if(num[i][j]==num[i][temp]){
                         num[i][j]*=2;num[i][temp]=0;
-                        ///åç»­è®¡åˆ†æ“ä½œ
-                    break;}                         ///ç›¸åŒæ—¶åˆå¹¶
+                        ///ºóĞø¼Æ·Ö²Ù×÷
+                    break;}                         ///ÏàÍ¬Ê±ºÏ²¢
                     else if(temp!=j+1){
                         num[i][j+1]=num[i][temp];num[i][temp]=0;
-                    break;}                         ///ä¸åŒæ—¶ç¢°æ’
+                    break;}                         ///²»Í¬Ê±Åö×²
                 }
             }
         }
@@ -184,17 +181,17 @@ void Control()
         int i,j,temp;
         for(i=1;i<=Line;i++){
             for(j=Col;j>=1;j--){
-                if(!num[i][j])for(temp=j-1;temp>=1;temp--)if(num[i][temp]){num[i][j]=num[i][temp];num[i][temp]=0;}
+                if(!num[i][j])for(temp=j-1;temp>=1;temp--)if(num[i][temp]){num[i][j]=num[i][temp];num[i][temp]=0;break;}
                 if(!num[i][j])continue;
-                for(temp=j-1;temp>=1;temp--){     ///è®¾ç½®tempå¾ªç¯ä½œç”¨ï¼šé€ä¸ªtempä¸jæ¯”è¾ƒ
-                    if(!num[i][temp])continue;      ///ç©ºç™½å¤„ç†
+                for(temp=j-1;temp>=1;temp--){     ///ÉèÖÃtempÑ­»·×÷ÓÃ£ºÖğ¸ötempÓëj±È½Ï
+                    if(!num[i][temp])continue;      ///¿Õ°×´¦Àí
                     if(num[i][j]==num[i][temp]){
                         num[i][j]*=2;num[i][temp]=0;
-                        ///åç»­è®¡åˆ†æ“ä½œ
-                    break;}                         ///ç›¸åŒæ—¶åˆå¹¶
+                        ///ºóĞø¼Æ·Ö²Ù×÷
+                    break;}                         ///ÏàÍ¬Ê±ºÏ²¢
                     else if(temp!=j-1){
                         num[i][j-1]=num[i][temp];num[i][temp]=0;
-                    break;}                         ///ä¸åŒæ—¶ç¢°æ’
+                    break;}                         ///²»Í¬Ê±Åö×²
                 }
             }
         }
@@ -203,17 +200,17 @@ void Control()
         int i,j,temp;
         for(j=1;j<=Col;j++){
             for(i=1;i<=Line;i++){
-                if(!num[i][j])for(temp=i+1;temp<=Line;temp++)if(num[temp][j]){num[i][j]=num[temp][j];num[temp][j]=0;}
+                if(!num[i][j])for(temp=i+1;temp<=Line;temp++)if(num[temp][j]){num[i][j]=num[temp][j];num[temp][j]=0;break;}
                 if(!num[i][j])continue;
-                for(temp=i+1;temp<=Line;temp++){     ///è®¾ç½®tempå¾ªç¯ä½œç”¨ï¼šé€ä¸ªtempä¸jæ¯”è¾ƒ
-                    if(!num[temp][j])continue;      ///ç©ºç™½å¤„ç†
+                for(temp=i+1;temp<=Line;temp++){     ///ÉèÖÃtempÑ­»·×÷ÓÃ£ºÖğ¸ötempÓëj±È½Ï
+                    if(!num[temp][j])continue;      ///¿Õ°×´¦Àí
                     if(num[i][j]==num[temp][j]){
                         num[i][j]*=2;num[temp][j]=0;
-                        ///åç»­è®¡åˆ†æ“ä½œ
-                    break;}                         ///ç›¸åŒæ—¶åˆå¹¶
+                        ///ºóĞø¼Æ·Ö²Ù×÷
+                    break;}                         ///ÏàÍ¬Ê±ºÏ²¢
                     else if(temp!=i+1){
                         num[i+1][j]=num[temp][j];num[temp][j]=0;
-                    break;}                         ///ä¸åŒæ—¶ç¢°æ’
+                    break;}                         ///²»Í¬Ê±Åö×²
                 }
             }
         }
@@ -222,17 +219,17 @@ void Control()
         int i,j,temp;
         for(j=1;j<=Col;j++){
             for(i=Line;i>=1;i--){
-                if(!num[i][j])for(temp=i-1;temp>=1;temp--)if(num[temp][j]){num[i][j]=num[temp][j];num[temp][j]=0;}
+                if(!num[i][j])for(temp=i-1;temp>=1;temp--)if(num[temp][j]){num[i][j]=num[temp][j];num[temp][j]=0;break;}
                 if(!num[i][j])continue;
-                for(temp=i-1;temp>=1;temp--){     ///è®¾ç½®tempå¾ªç¯ä½œç”¨ï¼šé€ä¸ªtempä¸jæ¯”è¾ƒ
-                    if(!num[i][temp])continue;      ///ç©ºç™½å¤„ç†
+                for(temp=i-1;temp>=1;temp--){     ///ÉèÖÃtempÑ­»·×÷ÓÃ£ºÖğ¸ötempÓëj±È½Ï
+                    if(!num[temp][j])continue;      ///¿Õ°×´¦Àí
                     if(num[i][j]==num[temp][j]){
                         num[i][j]*=2;num[temp][j]=0;
-                        ///åç»­è®¡åˆ†æ“ä½œ
-                    break;}                         ///ç›¸åŒæ—¶åˆå¹¶
+                        ///ºóĞø¼Æ·Ö²Ù×÷
+                    break;}                         ///ÏàÍ¬Ê±ºÏ²¢
                     else if(temp!=i-1){
                         num[i-1][j]=num[temp][j];num[temp][j]=0;
-                    break;}                         ///ä¸åŒæ—¶ç¢°æ’
+                    break;}                         ///²»Í¬Ê±Åö×²
                 }
             }
         }
@@ -247,8 +244,8 @@ void New_random()
 		colu=rand()%4+1;
 		row=rand()%4+1;
 	}while(num[row][colu]!=0);
-	/* ç”Ÿæˆéšæœºä½ç½®
-	æ­¤å¤„æœ‰å¿…è¦è¿›è¡Œä¼˜åŒ–ï¼Œå‡å°‘éšæœºä½ç½®ç”Ÿæˆçš„æ—¶é—´  */
+	/* Éú³ÉËæ»úÎ»ÖÃ
+	´Ë´¦ÓĞ±ØÒª½øĞĞÓÅ»¯£¬¼õÉÙËæ»úÎ»ÖÃÉú³ÉµÄÊ±¼ä  */
 
 	int a;
 	a=rand()%2;
@@ -266,40 +263,40 @@ void New_random()
 
 /*
 function 'Is_over"
-è¿”å› 0 è¡¨ç¤ºç©ºæ ¼å·²æ»¡ï¼Œæ¸¸æˆç»“æŸï¼›
-è¿”å› 1 è¡¨ç¤ºæœªç»“æŸï¼Œæ¸¸æˆç»§ç»­ï¼›
-è¿”å› 2 è¡¨ç¤ºå‡ºç°æœ€å¤§å€¼2048ï¼Œæ¸¸æˆèƒœåˆ©ï¼Œç»“æŸ
+·µ»Ø 0 ±íÊ¾¿Õ¸ñÒÑÂú£¬ÓÎÏ·½áÊø£»
+·µ»Ø 1 ±íÊ¾Î´½áÊø£¬ÓÎÏ·¼ÌĞø£»
+·µ»Ø 2 ±íÊ¾³öÏÖ×î´óÖµ2048£¬ÓÎÏ·Ê¤Àû£¬½áÊø
 */
 int Is_over()
 {
-	int i,j;//i ç”±äºè¡Œè®¡æ•°ï¼›j ç”¨äºåˆ—è®¡æ•°///å·å·å«Œå¼ƒä¸€å¥ï¼Œè¿™å‡½æ•°çš„ç©ºè¡Œæ€ä¹ˆè¿™ä¹ˆé•¿å•Šï¼ˆçœ‹ä¸åˆ°æˆ‘çœ‹ä¸åˆ°æˆ‘ï¼‰
+	int i,j;//i ÓÉÓÚĞĞ¼ÆÊı£»j ÓÃÓÚÁĞ¼ÆÊı///ÍµÍµÏÓÆúÒ»¾ä£¬Õâº¯ÊıµÄ¿ÕĞĞÔõÃ´ÕâÃ´³¤°¡£¨¿´²»µ½ÎÒ¿´²»µ½ÎÒ£©
 
-	//è¡Œæ‰«æåˆ¤æ–­
+	//ĞĞÉ¨ÃèÅĞ¶Ï
 	for(j=Col;j>=1;--j){
 		for(i=Line;i>=1;--i){
 
 			if(num[i][j]==2048){
-				return 2;//å‡ºç°2048ï¼Œèƒœåˆ©ï¼Œæ¸¸æˆç»“æŸ
+				return 2;//³öÏÖ2048£¬Ê¤Àû£¬ÓÎÏ·½áÊø
 			}
 
 			else{
 
 				if(num[i][j]==0){
-					return 1;//æ²¡æœ‰2048ä½†ä»æœ‰ç©ºæ ¼ï¼Œæ¸¸æˆç»§ç»­ï¼›
+					return 1;//Ã»ÓĞ2048µ«ÈÔÓĞ¿Õ¸ñ£¬ÓÎÏ·¼ÌĞø£»
 				}
 
 				else{
 					if(num[i][j-1]==num[i][j]){
-				    	return 1;//å·¦è¾¹ç›¸ç­‰æœªç»“æŸçš„æƒ…å†µï¼Œæ¸¸æˆç»§ç»­
+				    	return 1;//×ó±ßÏàµÈÎ´½áÊøµÄÇé¿ö£¬ÓÎÏ·¼ÌĞø
 				    }
 				}
 
 			}
 		}
 	}
-	//è¡Œæ‰«æåˆ¤æ–­ç»“æŸ
+	//ĞĞÉ¨ÃèÅĞ¶Ï½áÊø
 
-	//åˆ—æ‰«æåˆ¤æ–­éƒ¨åˆ†ï¼Œè¯¥éƒ¨åˆ†åªéœ€åˆ¤æ–­ä¸Šé¢çš„æ•°æ˜¯å¦èƒ½åˆå¹¶
+	//ÁĞÉ¨ÃèÅĞ¶Ï²¿·Ö£¬¸Ã²¿·ÖÖ»ĞèÅĞ¶ÏÉÏÃæµÄÊıÊÇ·ñÄÜºÏ²¢
 	for(i=Line;i>=1;--i){
 		for(j=Col;j>=1;--j){
 			if(num[i-1][j]==num[i][j]){
@@ -307,8 +304,8 @@ int Is_over()
 			}
 		}
 	}
-	 //åˆ—æ‰«æåˆ¤æ–­ç»“æŸéƒ¨åˆ†ç»“æŸ
+	 //ÁĞÉ¨ÃèÅĞ¶Ï½áÊø²¿·Ö½áÊø
 
-	//èƒ½è¿è¡Œåˆ°è¿™é‡Œè¡¨æ˜æ²¡æœ‰ç©ºæ ¼ï¼Œæ²¡æœ‰æœ€å¤§å€¼ï¼Œæ‰€ä»¥è¾“äº†
+	//ÄÜÔËĞĞµ½ÕâÀï±íÃ÷Ã»ÓĞ¿Õ¸ñ£¬Ã»ÓĞ×î´óÖµ£¬ËùÒÔÊäÁË
 	return 0;
 }
