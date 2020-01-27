@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include<conio.h>
+#include<time.h>
 ///定义全局变量4*4个，从num[1][1]开始
 int num[5][5],Line=4,Col=4;
 ///自定义函数    初步定义函数都为void，可能后续有些要变为int
@@ -125,4 +126,30 @@ void Control()
 	}//end switch
 }
 ///end function 'Control';
+
+///function 'New_random'
+void New_random()
+{
+	srand(time(NULL));
+	int col,row;
+	do{
+		col=rand()%4+1;
+		row=rand()%4+1;
+	}while(num[row][col]!=0);
+	/* 生成随机位置 
+	此处有必要进行优化，减少随机位置生成的时间  */ 
+	
+	int a;
+	a=rand()%2;
+	if(a==1){
+		num[row][col]=2;
+	}
+	else{
+		num[row][col]=4;
+	}
+	return;
+	
+	
+}
+///end function 'New_random'
 
