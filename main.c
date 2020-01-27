@@ -1,18 +1,18 @@
-/*�������ĵĳ���*/
+/*摆脱无聊的尝试*/
 
-///��Ϸ2048����̨
-///������
-///1.��ӡ���棨ÿ�δ�ӡҪ��ˢ�£�
-///2.��ʼ������
-///3.���뷽���
-///4.��Ӧ����
-///5.���λ����������
-///6.�Ƿ���
-///7.�ж���Ϸ�Ƿ�������ǣ��������񣺻ص�3��
+///游戏2048工作台
+///程序步骤
+///1.打印界面（每次打印要有刷新）
+///2.初始化变量
+///3.键入方向键
+///4.对应操作
+///5.随机位置生成新数
+///6.记分数
+///7.判断游戏是否结束（是：结束；否：回到3）
 
-///����������������ɲ��ֺ�����ͳһ�������������Լ�ϲ������д�ģ��Ĳ���д
+///合作方法：各自完成部分函数，统一变量命名，拿自己喜欢（会写的）的部分写
 
-///�����������Ұٶȣ���ˢ��ͬѧҲ�У����Լ�Ҳ���ᣬ�������Է�����ȷ�ϣ���Ц��������
+///代码有问题找百度，找刷子同学也行，他自己也不会，不过可以发给他确认（嘲笑）他不会
 
 
 #include <stdio.h>
@@ -20,39 +20,39 @@
 #include<conio.h>
 #include<time.h>
 
-///����ȫ�ֱ���4*4������num[1][1]��ʼ
+///定义全局变量4*4个，从num[1][1]开始
 int num[5][5];
 int Line=4;
 int Col=4;
 int Score;
-///�Զ��庯�� ,�������庯����Ϊvoid�����ܺ�����ЩҪ��Ϊint
+///自定义函数 ,初步定义函数都为void，可能后续有些要变为int
 
-/*��ӡ����*/
+/*打印界面*/
 void Print();
 
-/*��ʼ������*/
+/*初始化变量*/
 void Initial();
 
-/*���뷽���*/
+/*键入方向键*/
 void Control();
     void Turn_left();
     void Turn_right();
     void Turn_up();
     void Turn_down();
 
-/*���������*/
-///��rand()����
+/*生成随机数*/
+///用rand()种子
 void New_random();
 
-/*�ж���Ϸ�Ƿ����*/
+/*判断游戏是否结束*/
 int Is_over();
 
 
-///main������Ϊ���壬��ͼҪһĿ��Ȼ����������Ҫ̫�࣬��Ҫ�����������Զ��庯��
+///main函数作为主体，视图要一目了然，代码量不要太多，主要作用是引入自定义函数
 int main()
 {
 	Initial();
-	New_random();//�˴��հ�ԭ��Ϸ��ʹ��һ��ʼ����������������
+	New_random();//此处照搬原游戏，使得一开始便可生成两个随机数
 
 	int judge=1;
 
@@ -76,38 +76,38 @@ void Print(){
     system("cls");
     int i,j;
     ///Head
-    printf("�X");
+    printf("╔");
     for(j=1;j<=Col;j++){
-        printf("�T�T�T�T");
-        if(Col-j)   printf("�j");
+        printf("════");
+        if(Col-j)   printf("╦");
     }
-    printf("�[\n");
+    printf("╗\n");
     ///body
     for(i=1;i<=Line;i++){
         for(j=1;j<=Col;j++){
-            if(!num[i][j]){printf("�U    ");continue;}
-            printf("�U%4d",num[i][j]);
+            if(!num[i][j]){printf("║    ");continue;}
+            printf("║%4d",num[i][j]);
         }
-        printf("�U\n");
+        printf("║\n");
         if(i-Line){
         for(j=1;j<=Col;j++){
-            printf("�U�T�T�T�T");
+            printf("║════");
         }
-        printf("�U\n");}
+        printf("║\n");}
     }
     ///foot
-    printf("�^");
+    printf("╚");
     for(j=1;j<=Col;j++){
-        printf("�T�T�T�T");
-        if(Col-j)   printf("�m");
+        printf("════");
+        if(Col-j)   printf("╩");
     }
-    printf("�a");
+    printf("╝");
 
 
 }
 
 
-///��ʼ������
+///初始化变量
 void Initial()
 {
 	int i,j;
@@ -117,38 +117,38 @@ void Initial()
 		}
 	}
 }
-///��ʼ�����
-/*��ʵ��ȫ�ֱ������û����ʽ��ʼ���Ļ�����������ʱ�ᱻ�Զ���ʼ��Ϊ 0 */
+///初始化完成
+/*其实，全局变量如果没有显式初始化的话，代码运行时会被自动初始化为 0 */
 
 
 ///function 'Control':
 void Control()
 {
 	char operation;
-	operation=getch();  /*������� awsd;*/
+	operation=getch();  /*键入操作 awsd;*/
 
 	switch(operation){
 
-		/*����*/
+		/*向左*/
 		case 'a':
 		case 'A':
 			Turn_left();
 			break;
 
 
-		/*����*/
+		/*向右*/
 		case 'd':
 		case 'D':
 		    Turn_right();
 		    break;
 
-		/*����*/
+		/*向上*/
 		case 'w':
 		case 'W':
 			Turn_up();
 			break;
 
-		/*����*/
+		/*向下*/
 		case 's':
 		case 'S':
 			Turn_down();
@@ -157,22 +157,23 @@ void Control()
 	}//end switch
 }
 ///end function 'Control';
-///�ƶ�����
+///移动操作
     void Turn_left(){
         int i,j,temp;
         for(i=1;i<=Line;i++){
             for(j=1;j<=Col;j++){
                 if(!num[i][j])for(temp=j+1;temp<=Col;temp++)if(num[i][temp]){num[i][j]=num[i][temp];num[i][temp]=0;break;}
                 if(!num[i][j])continue;
-                for(temp=j+1;temp<=Col;temp++){     ///����tempѭ�����ã����temp��j�Ƚ�
-                    if(!num[i][temp])continue;      ///�հ״���
+                for(temp=j+1;temp<=Col;temp++){     ///设置temp循环作用：逐个temp与j比较
+                    if(!num[i][temp])continue;      ///空白处理
                     if(num[i][j]==num[i][temp]){
                         num[i][j]*=2;num[i][temp]=0;
-                        ///�����Ʒֲ���
-                    break;}                         ///��ͬʱ�ϲ�
+                        ///后续计分操作
+                    break;}                         ///相同时合并
                     else if(temp!=j+1){
                         num[i][j+1]=num[i][temp];num[i][temp]=0;
-                    break;}                         ///��ͬʱ��ײ
+                    break;}                         ///不同时碰撞
+		    break;
                 }
             }
         }
@@ -183,15 +184,16 @@ void Control()
             for(j=Col;j>=1;j--){
                 if(!num[i][j])for(temp=j-1;temp>=1;temp--)if(num[i][temp]){num[i][j]=num[i][temp];num[i][temp]=0;break;}
                 if(!num[i][j])continue;
-                for(temp=j-1;temp>=1;temp--){     ///����tempѭ�����ã����temp��j�Ƚ�
-                    if(!num[i][temp])continue;      ///�հ״���
+                for(temp=j-1;temp>=1;temp--){     ///设置temp循环作用：逐个temp与j比较
+                    if(!num[i][temp])continue;      ///空白处理
                     if(num[i][j]==num[i][temp]){
                         num[i][j]*=2;num[i][temp]=0;
-                        ///�����Ʒֲ���
-                    break;}                         ///��ͬʱ�ϲ�
+                        ///后续计分操作
+                    break;}                         ///相同时合并
                     else if(temp!=j-1){
                         num[i][j-1]=num[i][temp];num[i][temp]=0;
-                    break;}                         ///��ͬʱ��ײ
+                    break;}                         ///不同时碰撞
+		    break;
                 }
             }
         }
@@ -202,15 +204,16 @@ void Control()
             for(i=1;i<=Line;i++){
                 if(!num[i][j])for(temp=i+1;temp<=Line;temp++)if(num[temp][j]){num[i][j]=num[temp][j];num[temp][j]=0;break;}
                 if(!num[i][j])continue;
-                for(temp=i+1;temp<=Line;temp++){     ///����tempѭ�����ã����temp��j�Ƚ�
-                    if(!num[temp][j])continue;      ///�հ״���
+                for(temp=i+1;temp<=Line;temp++){     ///设置temp循环作用：逐个temp与j比较
+                    if(!num[temp][j])continue;      ///空白处理
                     if(num[i][j]==num[temp][j]){
                         num[i][j]*=2;num[temp][j]=0;
-                        ///�����Ʒֲ���
-                    break;}                         ///��ͬʱ�ϲ�
+                        ///后续计分操作
+                    break;}                         ///相同时合并
                     else if(temp!=i+1){
                         num[i+1][j]=num[temp][j];num[temp][j]=0;
-                    break;}                         ///��ͬʱ��ײ
+                    break;}                         ///不同时碰撞
+		    break;
                 }
             }
         }
@@ -221,15 +224,16 @@ void Control()
             for(i=Line;i>=1;i--){
                 if(!num[i][j])for(temp=i-1;temp>=1;temp--)if(num[temp][j]){num[i][j]=num[temp][j];num[temp][j]=0;break;}
                 if(!num[i][j])continue;
-                for(temp=i-1;temp>=1;temp--){     ///����tempѭ�����ã����temp��j�Ƚ�
-                    if(!num[temp][j])continue;      ///�հ״���
+                for(temp=i-1;temp>=1;temp--){     ///设置temp循环作用：逐个temp与j比较
+                    if(!num[temp][j])continue;      ///空白处理
                     if(num[i][j]==num[temp][j]){
                         num[i][j]*=2;num[temp][j]=0;
-                        ///�����Ʒֲ���
-                    break;}                         ///��ͬʱ�ϲ�
+                        ///后续计分操作
+                    break;}                         ///相同时合并
                     else if(temp!=i-1){
                         num[i-1][j]=num[temp][j];num[temp][j]=0;
-                    break;}                         ///��ͬʱ��ײ
+                    break;}                         ///不同时碰撞
+		    break;
                 }
             }
         }
@@ -244,8 +248,8 @@ void New_random()
 		colu=rand()%4+1;
 		row=rand()%4+1;
 	}while(num[row][colu]!=0);
-	/* �������λ��
-	�˴��б�Ҫ�����Ż����������λ�����ɵ�ʱ��  */
+	/* 生成随机位置
+	此处有必要进行优化，减少随机位置生成的时间  */
 
 	int a;
 	a=rand()%2;
@@ -263,40 +267,40 @@ void New_random()
 
 /*
 function 'Is_over"
-���� 0 ��ʾ�ո���������Ϸ������
-���� 1 ��ʾδ��������Ϸ������
-���� 2 ��ʾ�������ֵ2048����Ϸʤ��������
+返回 0 表示空格已满，游戏结束；
+返回 1 表示未结束，游戏继续；
+返回 2 表示出现最大值2048，游戏胜利，结束
 */
 int Is_over()
 {
-	int i,j;//i �����м�����j �����м���///͵͵����һ�䣬�⺯���Ŀ�����ô��ô�������������ҿ������ң�
+	int i,j;//i 由于行计数；j 用于列计数///偷偷嫌弃一句，这函数的空行怎么这么长啊（看不到我看不到我）
 
-	//��ɨ���ж�
+	//行扫描判断
 	for(j=Col;j>=1;--j){
 		for(i=Line;i>=1;--i){
 
 			if(num[i][j]==2048){
-				return 2;//����2048��ʤ������Ϸ����
+				return 2;//出现2048，胜利，游戏结束
 			}
 
 			else{
 
 				if(num[i][j]==0){
-					return 1;//û��2048�����пո���Ϸ������
+					return 1;//没有2048但仍有空格，游戏继续；
 				}
 
 				else{
 					if(num[i][j-1]==num[i][j]){
-				    	return 1;//������δ�������������Ϸ����
+				    	return 1;//左边相等未结束的情况，游戏继续
 				    }
 				}
 
 			}
 		}
 	}
-	//��ɨ���жϽ���
+	//行扫描判断结束
 
-	//��ɨ���жϲ��֣��ò���ֻ���ж���������Ƿ��ܺϲ�
+	//列扫描判断部分，该部分只需判断上面的数是否能合并
 	for(i=Line;i>=1;--i){
 		for(j=Col;j>=1;--j){
 			if(num[i-1][j]==num[i][j]){
@@ -304,8 +308,8 @@ int Is_over()
 			}
 		}
 	}
-	 //��ɨ���жϽ������ֽ���
+	 //列扫描判断结束部分结束
 
-	//�����е��������û�пո�û�����ֵ����������
+	//能运行到这里表明没有空格，没有最大值，所以输了
 	return 0;
 }
