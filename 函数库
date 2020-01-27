@@ -1,0 +1,76 @@
+为了防止刷子同鞋手残把主.c文件写坏了，写好的函数接口先放这里
+
+
+///移动操作
+    void Turn_left(){
+        int i,j,temp;
+        for(i=1;i<=Line;i++){
+            for(j=1;j<=Col;j++){
+                if(!num[i][j])continue;
+                for(temp=j+1;temp<=Col;temp++){     ///设置temp循环作用：逐个temp与j比较
+                    if(!num[i][temp])continue;      ///空白处理
+                    if(num[i][j]==num[i][temp]){
+                        num[i][j]*=2;num[i][temp]=0;
+                        ///后续计分操作
+                    break;}                         ///相同时合并
+                    else if(temp!=j+1){
+                        num[i][j+1]=num[i][temp];num[i][temp]=0;
+                    break;}                         ///不同时碰撞
+                }
+            }
+        }
+    }
+    void Turn_right(){
+        int i,j,temp;
+        for(i=1;i<=Line;i++){
+            for(j=Col;j>=1;j--){
+                if(!num[i][j])continue;
+                for(temp=j-1;temp>=1;temp--){     ///设置temp循环作用：逐个temp与j比较
+                    if(!num[i][temp])continue;      ///空白处理
+                    if(num[i][j]==num[i][temp]){
+                        num[i][j]*=2;num[i][temp]=0;
+                        ///后续计分操作
+                    break;}                         ///相同时合并
+                    else if(temp!=j-1){
+                        num[i][j-1]=num[i][temp];num[i][temp]=0;
+                    break;}                         ///不同时碰撞
+                }
+            }
+        }
+    }
+    void Turn_up(){
+        int i,j,temp;
+        for(j=1;j<=Col;j++){
+            for(i=1;i<=Line;i++){
+                if(!num[i][j])continue;
+                for(temp=i+1;temp<=Line;temp++){     ///设置temp循环作用：逐个temp与j比较
+                    if(!num[temp][j])continue;      ///空白处理
+                    if(num[i][j]==num[temp][j]){
+                        num[i][j]*=2;num[temp][j]=0;
+                        ///后续计分操作
+                    break;}                         ///相同时合并
+                    else if(temp!=i+1){
+                        num[i+1][j]=num[temp][j];num[temp][j]=0;
+                    break;}                         ///不同时碰撞
+                }
+            }
+        }
+    }
+    void Turn_down(){
+        int i,j,temp;
+        for(j=1;j<=Col;j++){
+            for(i=Line;i>=1;i--){
+                if(!num[i][j])continue;
+                for(temp=i-1;temp>=1;temp--){     ///设置temp循环作用：逐个temp与j比较
+                    if(!num[i][temp])continue;      ///空白处理
+                    if(num[i][j]==num[temp][j]){
+                        num[i][j]*=2;num[temp][j]=0;
+                        ///后续计分操作
+                    break;}                         ///相同时合并
+                    else if(temp!=i-1){
+                        num[i-1][j]=num[temp][j];num[temp][j]=0;
+                    break;}                         ///不同时碰撞
+                }
+            }
+        }
+    }
