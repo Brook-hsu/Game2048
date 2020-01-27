@@ -15,6 +15,7 @@
 ///代码有问题找百度，找刷子同学也行，他自己也不会，不过可以发给他确认（嘲笑）他不会
 #include <stdio.h>
 #include <stdlib.h>
+#include<time.h>
 ///定义全局变量4*4个，从num[1][1]开始
 int num[5][5];
 ///自定义函数    初步定义函数都为void，可能后续有些要变为int
