@@ -1,40 +1,41 @@
-/*�������ĵĳ���*/
+/*摆脱无聊的尝试*/
 
-///��Ϸ2048����̨
-///������
-///1.��ӡ���棨ÿ�δ�ӡҪ��ˢ�£�
-///2.��ʼ������
-///3.���뷽���
-///4.��Ӧ����
-///5.���λ����������
-///6.�Ƿ���
-///7.�ж���Ϸ�Ƿ�������ǣ��������񣺻ص�3��
+///游戏2048工作台
+///程序步骤
+///1.打印界面（每次打印要有刷新）
+///2.初始化变量
+///3.键入方向键
+///4.对应操作
+///5.随机位置生成新数
+///6.记分数
+///7.判断游戏是否结束（是：结束；否：回到3）
 
-///����������������ɲ��ֺ�����ͳһ�������������Լ�ϲ������д�ģ��Ĳ���д
+///合作方法：各自完成部分函数，统一变量命名，拿自己喜欢（会写的）的部分写
 
-///�����������Ұٶȣ���ˢ��ͬѧҲ�У����Լ�Ҳ���ᣬ�������Է�����ȷ�ϣ���Ц��������
+///代码有问题找百度，找刷子同学也行，他自己也不会，不过可以发给他确认（嘲笑）他不会
 #include <stdio.h>
 #include <stdlib.h>
-///����ȫ�ֱ���4*4������num[1][1]��ʼ
+#include<conio.h>
+///定义全局变量4*4个，从num[1][1]开始
 int num[5][5],Line=4,Col=4;
-///�Զ��庯��    �������庯����Ϊvoid�����ܺ�����ЩҪ��Ϊint
-/*��ӡ����*/
+///自定义函数    初步定义函数都为void，可能后续有些要变为int
+/*打印界面*/
 void Print();
-/*��ʼ������*/
+/*初始化变量*/
 void Initial();
-/*���뷽���*////����Ҫ�ٶȽ��
+/*键入方向键*////可能要百度解决
 void Control();
     void Turn_left();
     void Turn_right();
     void Turn_up();
     void Turn_down();
-/*���������*////��rand()����
+/*生成随机数*////用rand()种子
 void New_random();
-/*�ж���Ϸ�Ƿ����*/
+/*判断游戏是否结束*/
 void Is_over();
 
 
-///main������Ϊ���壬��ͼҪһĿ��Ȼ����������Ҫ̫�࣬��Ҫ�����������Զ��庯��
+///main函数作为主体，视图要一目了然，代码量不要太多，主要作用是引入自定义函数
 int main()
 {
     Print();
@@ -44,31 +45,84 @@ int main()
 void Print(){
     int i,j;
     ///Head
-    printf("�X");
+    printf("╔");
     for(j=1;j<=Col;j++){
-        printf("�T�T�T�T");
-        if(Col-j)   printf("�j");
+        printf("════");
+        if(Col-j)   printf("╦");
     }
-    printf("�[\n");
+    printf("╗\n");
     ///body
     for(i=1;i<=Line;i++){
         for(j=1;j<=Col;j++){
-            printf("�U%4d",num[i][j]);
+            printf("║%4d",num[i][j]);
         }
-        printf("�U\n");
+        printf("║\n");
         if(i-Line){
         for(j=1;j<=Col;j++){
-            printf("�U�T�T�T�T");
+            printf("║════");
         }
-        printf("�U\n");}
+        printf("║\n");}
     }
     ///foot
-    printf("�^");
+    printf("╚");
     for(j=1;j<=Col;j++){
-        printf("�T�T�T�T");
-        if(Col-j)   printf("�m");
+        printf("════");
+        if(Col-j)   printf("╩");
     }
-    printf("�a");
+    printf("╝");
 
 
 }
+
+
+///初始化变量
+void Initial()
+{
+	int i,j;
+	for(i=1;i<Line+1;++i){
+		for(j=1;j<Col+1;++j){
+			num[i][j]=0;
+		}
+	}
+}
+///初始化完成
+/*其实，全局变量如果没有显式初始化的话，代码运行时会被自动初始化为 0 */ 
+
+
+///function 'Control':
+void Control()
+{
+	char operation;
+	operation=getch();  /*键入操作 awsd;*/
+	
+	switch(operation){
+		
+		/*向左*/ 
+		case 'a':
+		case 'A':
+			Turn_left();
+			break;
+		 
+		
+		/*向右*/	
+		case 'd':
+		case 'D':
+		    Turn_right();
+		    break;
+		 
+		/*向上*/    
+		case 'w':
+		case 'W':
+			Turn_up();
+			break;
+		
+		/*向下*/ 
+		case 's':
+		case 'S':
+			Turn_down();
+			break;
+			
+	}//end switch
+}
+///end function 'Control';
+
