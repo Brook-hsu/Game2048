@@ -34,7 +34,7 @@ void Print();
 void Initial();
 
 /*键入方向键*/
-void Control();
+int Control();
     void Turn_left();
     void Turn_right();
     void Turn_up();
@@ -55,15 +55,18 @@ int main()
 	New_random();//此处照搬原游戏，使得一开始便可生成两个随机数
 
 	int judge=1;
+	int b;
 
 	while(judge==1){
-		New_random();
+		if(b==1){
+		        New_random();
+		}
 		Print();
 		judge=Is_over();
 		if(judge==2||judge==0){
 			break;
 		}
-		Control();
+		b=Control();
 	}
 	if(judge==2)
 		printf("%s","WIN");
@@ -122,7 +125,7 @@ void Initial()
 
 
 ///function 'Control':
-void Control()
+int Control()
 {
 	char operation;
 	operation=getch();  /*键入操作 awsd;*/
@@ -153,8 +156,12 @@ void Control()
 		case 'S':
 			Turn_down();
 			break;
+			
+		default:
+			return 0;
 
 	}//end switch
+	return 1;
 }
 ///end function 'Control';
 ///移动操作
