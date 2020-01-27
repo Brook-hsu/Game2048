@@ -1,155 +1,215 @@
-/*æ‘†è„±æ— èŠçš„å°è¯•*/
+/*°ÚÍÑÎÞÁÄµÄ³¢ÊÔ*/
 
-///æ¸¸æˆ2048å·¥ä½œå°
-///ç¨‹åºæ­¥éª¤
-///1.æ‰“å°ç•Œé¢ï¼ˆæ¯æ¬¡æ‰“å°è¦æœ‰åˆ·æ–°ï¼‰
-///2.åˆå§‹åŒ–å˜é‡
-///3.é”®å…¥æ–¹å‘é”®
-///4.å¯¹åº”æ“ä½œ
-///5.éšæœºä½ç½®ç”Ÿæˆæ–°æ•°
-///6.è®°åˆ†æ•°
-///7.åˆ¤æ–­æ¸¸æˆæ˜¯å¦ç»“æŸï¼ˆæ˜¯ï¼šç»“æŸï¼›å¦ï¼šå›žåˆ°3ï¼‰
+///ÓÎÏ·2048¹¤×÷Ì¨
+///³ÌÐò²½Öè
+///1.´òÓ¡½çÃæ£¨Ã¿´Î´òÓ¡ÒªÓÐË¢ÐÂ£©
+///2.³õÊ¼»¯±äÁ¿
+///3.¼üÈë·½Ïò¼ü
+///4.¶ÔÓ¦²Ù×÷
+///5.Ëæ»úÎ»ÖÃÉú³ÉÐÂÊý
+///6.¼Ç·ÖÊý
+///7.ÅÐ¶ÏÓÎÏ·ÊÇ·ñ½áÊø£¨ÊÇ£º½áÊø£»·ñ£º»Øµ½3£©
 
-///åˆä½œæ–¹æ³•ï¼šå„è‡ªå®Œæˆéƒ¨åˆ†å‡½æ•°ï¼Œç»Ÿä¸€å˜é‡å‘½åï¼Œæ‹¿è‡ªå·±å–œæ¬¢ï¼ˆä¼šå†™çš„ï¼‰çš„éƒ¨åˆ†å†™
+///ºÏ×÷·½·¨£º¸÷×ÔÍê³É²¿·Öº¯Êý£¬Í³Ò»±äÁ¿ÃüÃû£¬ÄÃ×Ô¼ºÏ²»¶£¨»áÐ´µÄ£©µÄ²¿·ÖÐ´
 
-///ä»£ç æœ‰é—®é¢˜æ‰¾ç™¾åº¦ï¼Œæ‰¾åˆ·å­åŒå­¦ä¹Ÿè¡Œï¼Œä»–è‡ªå·±ä¹Ÿä¸ä¼šï¼Œä¸è¿‡å¯ä»¥å‘ç»™ä»–ç¡®è®¤ï¼ˆå˜²ç¬‘ï¼‰ä»–ä¸ä¼š
+///´úÂëÓÐÎÊÌâÕÒ°Ù¶È£¬ÕÒË¢×ÓÍ¬Ñ§Ò²ÐÐ£¬Ëû×Ô¼ºÒ²²»»á£¬²»¹ý¿ÉÒÔ·¢¸øËûÈ·ÈÏ£¨³°Ð¦£©Ëû²»»á
 #include <stdio.h>
 #include <stdlib.h>
 #include<conio.h>
-#include<time.h>
-///å®šä¹‰å…¨å±€å˜é‡4*4ä¸ªï¼Œä»Žnum[1][1]å¼€å§‹
+///¶¨ÒåÈ«¾Ö±äÁ¿4*4¸ö£¬´Ónum[1][1]¿ªÊ¼
 int num[5][5],Line=4,Col=4;
-///è‡ªå®šä¹‰å‡½æ•°    åˆæ­¥å®šä¹‰å‡½æ•°éƒ½ä¸ºvoidï¼Œå¯èƒ½åŽç»­æœ‰äº›è¦å˜ä¸ºint
-/*æ‰“å°ç•Œé¢*/
+///×Ô¶¨Òåº¯Êý    ³õ²½¶¨Òåº¯Êý¶¼Îªvoid£¬¿ÉÄÜºóÐøÓÐÐ©Òª±äÎªint
+/*´òÓ¡½çÃæ*/
 void Print();
-/*åˆå§‹åŒ–å˜é‡*/
+/*³õÊ¼»¯±äÁ¿*/
 void Initial();
-/*é”®å…¥æ–¹å‘é”®*////å¯èƒ½è¦ç™¾åº¦è§£å†³
+/*¼üÈë·½Ïò¼ü*////¿ÉÄÜÒª°Ù¶È½â¾ö
 void Control();
     void Turn_left();
     void Turn_right();
     void Turn_up();
     void Turn_down();
-/*ç”Ÿæˆéšæœºæ•°*////ç”¨rand()ç§å­
+/*Éú³ÉËæ»úÊý*////ÓÃrand()ÖÖ×Ó
 void New_random();
-/*åˆ¤æ–­æ¸¸æˆæ˜¯å¦ç»“æŸ*/
+/*ÅÐ¶ÏÓÎÏ·ÊÇ·ñ½áÊø*/
 void Is_over();
 
 
-///mainå‡½æ•°ä½œä¸ºä¸»ä½“ï¼Œè§†å›¾è¦ä¸€ç›®äº†ç„¶ï¼Œä»£ç é‡ä¸è¦å¤ªå¤šï¼Œä¸»è¦ä½œç”¨æ˜¯å¼•å…¥è‡ªå®šä¹‰å‡½æ•°
+///mainº¯Êý×÷ÎªÖ÷Ìå£¬ÊÓÍ¼ÒªÒ»Ä¿ÁËÈ»£¬´úÂëÁ¿²»ÒªÌ«¶à£¬Ö÷Òª×÷ÓÃÊÇÒýÈë×Ô¶¨Òåº¯Êý
 int main()
 {
-    Print();
+    Initial();
+    for(;1;){
+        Print();
+        Control();
+    }
+
+
+
+
     return 0;
 }
 
 void Print(){
+    system("cls");
     int i,j;
     ///Head
-    printf("â•”");
+    printf("¨X");
     for(j=1;j<=Col;j++){
-        printf("â•â•â•â•");
-        if(Col-j)   printf("â•¦");
+        printf("¨T¨T¨T¨T");
+        if(Col-j)   printf("¨j");
     }
-    printf("â•—\n");
+    printf("¨[\n");
     ///body
     for(i=1;i<=Line;i++){
         for(j=1;j<=Col;j++){
-            printf("â•‘%4d",num[i][j]);
+            if(!num[i][j]){printf("¨U    ");continue;}
+            printf("¨U%4d",num[i][j]);
         }
-        printf("â•‘\n");
+        printf("¨U\n");
         if(i-Line){
         for(j=1;j<=Col;j++){
-            printf("â•‘â•â•â•â•");
+            printf("¨U¨T¨T¨T¨T");
         }
-        printf("â•‘\n");}
+        printf("¨U\n");}
     }
     ///foot
-    printf("â•š");
+    printf("¨^");
     for(j=1;j<=Col;j++){
-        printf("â•â•â•â•");
-        if(Col-j)   printf("â•©");
+        printf("¨T¨T¨T¨T");
+        if(Col-j)   printf("¨m");
     }
-    printf("â•");
+    printf("¨a");
 
 
 }
 
 
-///åˆå§‹åŒ–å˜é‡
+///³õÊ¼»¯±äÁ¿
 void Initial()
 {
 	int i,j;
 	for(i=1;i<Line+1;++i){
 		for(j=1;j<Col+1;++j){
-			num[i][j]=0;
+			num[i][j]=2;
 		}
 	}
 }
-///åˆå§‹åŒ–å®Œæˆ
-/*å…¶å®žï¼Œå…¨å±€å˜é‡å¦‚æžœæ²¡æœ‰æ˜¾å¼åˆå§‹åŒ–çš„è¯ï¼Œä»£ç è¿è¡Œæ—¶ä¼šè¢«è‡ªåŠ¨åˆå§‹åŒ–ä¸º 0 */ 
+///³õÊ¼»¯Íê³É
+/*ÆäÊµ£¬È«¾Ö±äÁ¿Èç¹ûÃ»ÓÐÏÔÊ½³õÊ¼»¯µÄ»°£¬´úÂëÔËÐÐÊ±»á±»×Ô¶¯³õÊ¼»¯Îª 0 */
 
 
 ///function 'Control':
 void Control()
 {
 	char operation;
-	operation=getch();  /*é”®å…¥æ“ä½œ awsd;*/
-	
+	operation=getch();  /*¼üÈë²Ù×÷ awsd;*/
+
 	switch(operation){
-		
-		/*å‘å·¦*/ 
+
+		/*Ïò×ó*/
 		case 'a':
 		case 'A':
 			Turn_left();
 			break;
-		 
-		
-		/*å‘å³*/	
+
+
+		/*ÏòÓÒ*/
 		case 'd':
 		case 'D':
 		    Turn_right();
 		    break;
-		 
-		/*å‘ä¸Š*/    
+
+		/*ÏòÉÏ*/
 		case 'w':
 		case 'W':
 			Turn_up();
 			break;
-		
-		/*å‘ä¸‹*/ 
+
+		/*ÏòÏÂ*/
 		case 's':
 		case 'S':
 			Turn_down();
 			break;
-			
+
 	}//end switch
 }
 ///end function 'Control';
-
-///function 'New_random'
-void New_random()
-{
-	srand(time(NULL));
-	int col,row;
-	do{
-		col=rand()%4+1;
-		row=rand()%4+1;
-	}while(num[row][col]!=0);
-	/* ç”Ÿæˆéšæœºä½ç½® 
-	æ­¤å¤„æœ‰å¿…è¦è¿›è¡Œä¼˜åŒ–ï¼Œå‡å°‘éšæœºä½ç½®ç”Ÿæˆçš„æ—¶é—´  */ 
-	
-	int a;
-	a=rand()%2;
-	if(a==1){
-		num[row][col]=2;
-	}
-	else{
-		num[row][col]=4;
-	}
-	return;
-	
-	
-}
-///end function 'New_random'
+///ÒÆ¶¯²Ù×÷
+    void Turn_left(){
+        int i,j,temp;
+        for(i=1;i<=Line;i++){
+            for(j=1;j<=Col;j++){
+                if(!num[i][j])for(temp=j+1;temp<=Col;temp++)if(num[i][temp]){num[i][j]=num[i][temp];num[i][temp]=0;}
+                if(!num[i][j])continue;
+                for(temp=j+1;temp<=Col;temp++){     ///ÉèÖÃtempÑ­»·×÷ÓÃ£ºÖð¸ötempÓëj±È½Ï
+                    if(!num[i][temp])continue;      ///¿Õ°×´¦Àí
+                    if(num[i][j]==num[i][temp]){
+                        num[i][j]*=2;num[i][temp]=0;
+                        ///ºóÐø¼Æ·Ö²Ù×÷
+                    break;}                         ///ÏàÍ¬Ê±ºÏ²¢
+                    else if(temp!=j+1){
+                        num[i][j+1]=num[i][temp];num[i][temp]=0;
+                    break;}                         ///²»Í¬Ê±Åö×²
+                }
+            }
+        }
+    }
+    void Turn_right(){
+        int i,j,temp;
+        for(i=1;i<=Line;i++){
+            for(j=Col;j>=1;j--){
+                if(!num[i][j])for(temp=j-1;temp>=1;temp--)if(num[i][temp]){num[i][j]=num[i][temp];num[i][temp]=0;}
+                if(!num[i][j])continue;
+                for(temp=j-1;temp>=1;temp--){     ///ÉèÖÃtempÑ­»·×÷ÓÃ£ºÖð¸ötempÓëj±È½Ï
+                    if(!num[i][temp])continue;      ///¿Õ°×´¦Àí
+                    if(num[i][j]==num[i][temp]){
+                        num[i][j]*=2;num[i][temp]=0;
+                        ///ºóÐø¼Æ·Ö²Ù×÷
+                    break;}                         ///ÏàÍ¬Ê±ºÏ²¢
+                    else if(temp!=j-1){
+                        num[i][j-1]=num[i][temp];num[i][temp]=0;
+                    break;}                         ///²»Í¬Ê±Åö×²
+                }
+            }
+        }
+    }
+    void Turn_up(){
+        int i,j,temp;
+        for(j=1;j<=Col;j++){
+            for(i=1;i<=Line;i++){
+                if(!num[i][j])for(temp=i+1;temp<=Line;temp++)if(num[temp][j]){num[i][j]=num[temp][j];num[temp][j]=0;}
+                if(!num[i][j])continue;
+                for(temp=i+1;temp<=Line;temp++){     ///ÉèÖÃtempÑ­»·×÷ÓÃ£ºÖð¸ötempÓëj±È½Ï
+                    if(!num[temp][j])continue;      ///¿Õ°×´¦Àí
+                    if(num[i][j]==num[temp][j]){
+                        num[i][j]*=2;num[temp][j]=0;
+                        ///ºóÐø¼Æ·Ö²Ù×÷
+                    break;}                         ///ÏàÍ¬Ê±ºÏ²¢
+                    else if(temp!=i+1){
+                        num[i+1][j]=num[temp][j];num[temp][j]=0;
+                    break;}                         ///²»Í¬Ê±Åö×²
+                }
+            }
+        }
+    }
+    void Turn_down(){
+        int i,j,temp;
+        for(j=1;j<=Col;j++){
+            for(i=Line;i>=1;i--){
+                if(!num[i][j])for(temp=i-1;temp>=1;temp--)if(num[temp][j]){num[i][j]=num[temp][j];num[temp][j]=0;}
+                if(!num[i][j])continue;
+                for(temp=i-1;temp>=1;temp--){     ///ÉèÖÃtempÑ­»·×÷ÓÃ£ºÖð¸ötempÓëj±È½Ï
+                    if(!num[i][temp])continue;      ///¿Õ°×´¦Àí
+                    if(num[i][j]==num[temp][j]){
+                        num[i][j]*=2;num[temp][j]=0;
+                        ///ºóÐø¼Æ·Ö²Ù×÷
+                    break;}                         ///ÏàÍ¬Ê±ºÏ²¢
+                    else if(temp!=i-1){
+                        num[i-1][j]=num[temp][j];num[temp][j]=0;
+                    break;}                         ///²»Í¬Ê±Åö×²
+                }
+            }
+        }
+    }
 
