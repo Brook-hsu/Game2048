@@ -21,7 +21,9 @@
 #include<time.h> 
 
 ///定义全局变量4*4个，从num[1][1]开始
-int num[5][5],Line=4,Col=4;
+int num[5][5];
+int Line=4;
+int Col=4;
 
 ///自定义函数 ,初步定义函数都为void，可能后续有些要变为int
 
@@ -112,9 +114,9 @@ void Print(){
 void Initial()
 {
 	int i,j;
-	for(i=1;i<Line+1;++i){
-		for(j=1;j<Col+1;++j){
-			num[i][j]=2;
+	for(i=0;i<=Line;++i){
+		for(j=0;j<Col;++j){
+			num[i][j]=0;
 		}
 	}
 }
@@ -240,21 +242,21 @@ void Control()
 void New_random()
 {
 	srand(time(NULL));
-	int col,row;
+	int colu,row;
 	do{
-		col=rand()%4+1;
+		colu=rand()%4+1;
 		row=rand()%4+1;
-	}while(num[row][col]!=0);
+	}while(num[row][colu]!=0);
 	/* 生成随机位置
 	此处有必要进行优化，减少随机位置生成的时间  */
 
 	int a;
 	a=rand()%2;
 	if(a==1){
-		num[row][col]=2;
+		num[row][colu]=2;
 	}
 	else{
-		num[row][col]=4;
+		num[row][colu]=4;
 	}
 	return;
 
@@ -268,8 +270,6 @@ function 'Is_over"
 返回 1 表示未结束，游戏继续；
 返回 2 表示出现最大值2048，游戏胜利，结束
 */
-
-
 int Is_over()
 {
 	int i,j;//i 由于行计数；j 用于列计数///偷偷嫌弃一句，这函数的空行怎么这么长啊（看不到我看不到我）
