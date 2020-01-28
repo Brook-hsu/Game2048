@@ -11,7 +11,6 @@
 ///7.判断游戏是否结束（是：结束；否：回到3）
 
 ///合作方法：各自完成部分函数，统一变量命名，拿自己喜欢（会写的）的部分写
-
 ///代码有问题找百度，找刷子同学也行，他自己也不会，不过可以发给他确认（嘲笑）他不会
 
 #include <stdio.h>
@@ -51,13 +50,15 @@ int Is_over();
 ///main函数作为主体，视图要一目了然，代码量不要太多，主要作用是引入自定义函数
 int main()
 {
+    system("color 06");
     do{
     Welcome();
     if(game)
     switch(game){
         case 1:{
+            system("color 03");
             Initial();
-            New_random();//此处照搬原游戏，使得一开始便可生成两个随机数
+            New_random();New_random();//此处照搬原游戏，使得一开始便可生成两个随机数
             int judge=1;
             while(judge==1){
                 Print();
@@ -107,7 +108,8 @@ void Print(){
         printf("════");
         if(Col-j)   printf("╩");
     }
-    printf("╝");
+    printf("╝\n\n\n");
+    printf("\t\tw:↑  s:↓  a:←  d:→");
 }
 
 
@@ -117,7 +119,7 @@ void Initial()
     Score=0;
 	int i,j;
 	for(i=0;i<=Line;++i){
-		for(j=0;j<Col;++j){
+		for(j=0;j<=Col;++j){
 			num[i][j]=0;
 		}
 	}
@@ -133,27 +135,27 @@ int Control()
 	operation=getch();  /*键入操作 awsd;*/
 	switch(operation){
 		/*向左*/
+        case 75:
 		case 'a':
 		case 'A':
-        case 75:
 			Turn_left();
 			break;
 		/*向右*/
+		case 77:
 		case 'd':
 		case 'D':
-        case 77:
 		    Turn_right();
 		    break;
 		/*向上*/
+        case 72:
 		case 'w':
 		case 'W':
-        case 72:
 			Turn_up();
 			break;
 		/*向下*/
+        case 80:
 		case 's':
 		case 'S':
-        case 80:
 			Turn_down();
 			break;
 		default:
@@ -247,6 +249,13 @@ int Control()
 ///function 'New_random'
 void New_random()
 {
+    int i,j,check=0;
+    for(i=1;i<=Line;i++){
+        for(j=1;j<=Col;j++)
+            if(!num[i][j]){check=1;break;}
+        if(check)break;
+    }
+    if(!check)  return;
 	srand(time(NULL));
     int index=rand()%16;
 	while(num[index/4+1][index%4+1])    index=(index+3)%16;
