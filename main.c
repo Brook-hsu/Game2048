@@ -14,19 +14,18 @@
 
 ///代码有问题找百度，找刷子同学也行，他自己也不会，不过可以发给他确认（嘲笑）他不会
 
-
 #include <stdio.h>
 #include <stdlib.h>
-#include<conio.h>
-#include<time.h>
+#include <conio.h>
+#include <time.h>
 
 ///定义全局变量4*4个，从num[1][1]开始
 int num[5][5];
-int Line=5;
-int Col=4;
-int Score;
+int Line=4,Col=4;
+int Score,game;
 ///自定义函数 ,初步定义函数都为void，可能后续有些要变为int
 
+void Welcome();
 /*打印界面*/
 void Print();
 
@@ -46,35 +45,39 @@ void New_random();
 
 /*判断游戏是否结束*/
 int Is_over();
-
+    void Lose();
+    void Win();
 
 ///main函数作为主体，视图要一目了然，代码量不要太多，主要作用是引入自定义函数
 int main()
 {
-	Initial();
-	New_random();//此处照搬原游戏，使得一开始便可生成两个随机数
-
-	int judge=1;
-
-	while(judge==1){
-
-		Print();
-		judge=Is_over();
-		if(judge==2||judge==0){
-			break;
-		}
-        if(!Control())continue;
-        New_random();
-	}
-	if(judge==2)
-		printf("%s","WIN");
-	else
-		printf("%s","LOSE");
+    do{
+    Welcome();
+    if(game)
+    switch(game){
+        case 1:{
+            Initial();
+            New_random();//此处照搬原游戏，使得一开始便可生成两个随机数
+            int judge=1;
+            while(judge==1){
+                Print();
+                judge=Is_over();
+                if(judge==2||judge==0)			break;
+                if(!Control())  continue;
+                New_random();
+            }
+            if(judge==2)    Win();
+            else    		Lose();
+        }
+    }
+    else break;
+    }while(1);
     return 0;
 }
 
 void Print(){
     system("cls");
+    printf("\t———————————联合出品，不作商业用———————————\n\n\n");
     printf("\t\t你的分数是：%4d\n",Score);
     int i,j;
     ///Head
@@ -305,4 +308,22 @@ int Is_over()
 
 	//能运行到这里表明没有空格，没有最大值，所以输了
 	return 0;
+}
+
+void Welcome(){
+    printf("\t———————————联合出品，不作商业用———————————\n"
+    "\t~欢迎来到****（没想好）游戏~！\n"
+    "\t***************************\n"
+    "\t请选择游戏：\n"
+    "\t1.游戏2048\n"
+    "\t2.\n"
+    "\t0.退出游戏\n"
+    "\t***************************\n");
+    scanf("%d",&game);
+}
+void Lose(){
+    printf("\n\n\t\t YOU LOSE !\n\n");
+}
+void Win(){
+    printf("\n\n\t\t YOU WIN !\n\n");
 }
