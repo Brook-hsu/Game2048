@@ -12,10 +12,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-///定义全局变量4*4个，从num[1][1]开始
 
 int game;
-///自定义函数 ,初步定义函数都为void，可能后续有些要变为int
 
 void Welcome();
 void Game2048();
@@ -35,6 +33,9 @@ int main()
         case 2:
             MineSweep();
         break;
+        case 3:
+            General();
+        break;
     }
     else break;
     }while(1);
@@ -49,7 +50,8 @@ void Welcome(){
     "\t请选择游戏：\n"
     "\t1. 游戏2048\n"
     "\t2. 扫雷\n"
-    "\t0.退出游戏\n"
+    "\t3. 常胜将军\n"
+    "\t0. 退出游戏\n"
     "\t***************************\n");
     scanf("%d",&game);
 }
