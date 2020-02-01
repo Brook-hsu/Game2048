@@ -5,24 +5,24 @@
 #include <time.h>
 #include<Windows.h>
 
-/*æ‰“å°ç•Œé¢*/
+/*´òÓ¡½çÃæ*/
 void Print(int **num,int Line,int Col,int Target);
 
-/*åˆå§‹åŒ–å˜é‡*/
+/*³õÊ¼»¯±äÁ¿*/
 void Initial(int **num,int Line,int Col);
 
-/*é”®å…¥æ–¹å‘é”®*/
+/*¼üÈë·½Ïò¼ü*/
 int Control(int **num,int Line,int Col,int Target);
     void Turn_left(int **num,int Line,int Col,int Target);
     void Turn_right(int **num,int Line,int Col,int Target);
     void Turn_up(int **num,int Line,int Col,int Target);
     void Turn_down(int **num,int Line,int Col,int Target);
 
-/*ç”Ÿæˆéšæœºæ•°*/
-///ç”¨rand()ç§å­
+/*Éú³ÉËæ»úÊı*/
+///ÓÃrand()ÖÖ×Ó
 void New_random(int **num,int Line,int Col,int Target);
 
-/*åˆ¤æ–­æ¸¸æˆæ˜¯å¦ç»“æŸ*/
+/*ÅĞ¶ÏÓÎÏ·ÊÇ·ñ½áÊø*/
 int Is_over(int **num,int Line,int Col,int Target);
     void Lose();
     void Win();
@@ -52,8 +52,8 @@ void Game2048()
     if(game2048==2){
         system("cls");
         printf("\n\n\n\n\n\t\t\t%s\n\n\n","input the number of Line , Column and Target you want");
-        printf("\t\t\tå»ºè®®ç©å®¶å°†è¡Œåˆ—æ•°è®¾ä¸º4çš„å€æ•°\n");
-        printf("\t\t\tå°†ç›®æ ‡å€¼è®¾ä¸ºè¡Œæ•°(Line)é™¤ä»¥4çš„æ•´æ•°éƒ¨åˆ†\n\t\t\tä¹˜ä»¥ åˆ—æ•°(Col)é™¤ä»¥4çš„æ•´æ•°éƒ¨åˆ† å†ä¹˜ä»¥512\n\n");
+        printf("\t\t\t½¨ÒéÍæ¼Ò½«ĞĞÁĞÊıÉèÎª4µÄ±¶Êı\n");
+        printf("\t\t\t½«Ä¿±êÖµÉèÎªĞĞÊı(Line)³ıÒÔ4µÄÕûÊı²¿·Ö\n\t\t\t³ËÒÔ ÁĞÊı(Col)³ıÒÔ4µÄÕûÊı²¿·Ö ÔÙ³ËÒÔ512\n\n");
         printf("\t\t\t");
         printf("%s\n\n","Of course,you happy is OKKKK!");
         printf("\t\t\t%s\t","Line:");
@@ -68,14 +68,14 @@ void Game2048()
         return;
     }
 
-    //æ­¤å¤„å¢åŠ äºŒç»´æ•°ç»„ç”³è¯·å†…å­˜
+    //´Ë´¦Ôö¼Ó¶şÎ¬Êı×éÉêÇëÄÚ´æ
     int **num;
     int i;
     num=(int **)malloc(sizeof(*num)*(Line+1));
     for(i=0;i<Line+1;++i)    num[i]=(int *)malloc(sizeof(**num)*(Col+1));
     Initial(num,Line,Col);
     New_random(num,Line,Col,Target);
-    New_random(num,Line,Col,Target);//æ­¤å¤„ç…§æ¬åŸæ¸¸æˆï¼Œä½¿å¾—ä¸€å¼€å§‹ä¾¿å¯ç”Ÿæˆä¸¤ä¸ªéšæœºæ•°
+    New_random(num,Line,Col,Target);//´Ë´¦ÕÕ°áÔ­ÓÎÏ·£¬Ê¹µÃÒ»¿ªÊ¼±ã¿ÉÉú³ÉÁ½¸öËæ»úÊı
     int judge=1;
     while(judge==1){
         Print(num,Line,Col,Target);
@@ -90,7 +90,7 @@ void Game2048()
     else    		Lose();
 }
 
-///åˆå§‹åŒ–å˜é‡
+///³õÊ¼»¯±äÁ¿
 void Initial(int **num,int Line,int Col)
 {
     Score=0;
@@ -101,8 +101,8 @@ void Initial(int **num,int Line,int Col)
 		}
 	}
 }
-///åˆå§‹åŒ–å®Œæˆ
-/*å…¶å®ï¼Œå…¨å±€å˜é‡å¦‚æœæ²¡æœ‰æ˜¾å¼åˆå§‹åŒ–çš„è¯ï¼Œä»£ç è¿è¡Œæ—¶ä¼šè¢«è‡ªåŠ¨åˆå§‹åŒ–ä¸º 0 */
+///³õÊ¼»¯Íê³É
+/*ÆäÊµ£¬È«¾Ö±äÁ¿Èç¹ûÃ»ÓĞÏÔÊ½³õÊ¼»¯µÄ»°£¬´úÂëÔËĞĞÊ±»á±»×Ô¶¯³õÊ¼»¯Îª 0 */
 
 
 ///function 'New_random'
@@ -121,8 +121,8 @@ void New_random(int **num,int Line,int Col,int Target)
 	    colu=rand()%Col+1;
 	    row=rand()%Line+1;
 	}while(num[row][colu]);
-	/* ç”Ÿæˆéšæœºä½ç½®
-	æ­¤å¤„æœ‰å¿…è¦è¿›è¡Œä¼˜åŒ–ï¼Œå‡å°‘éšæœºä½ç½®ç”Ÿæˆçš„æ—¶é—´  */
+	/* Éú³ÉËæ»úÎ»ÖÃ
+	´Ë´¦ÓĞ±ØÒª½øĞĞÓÅ»¯£¬¼õÉÙËæ»úÎ»ÖÃÉú³ÉµÄÊ±¼ä  */
 	int a=rand()%2;
 	if(a)
 		num[row][colu]=2;
@@ -137,27 +137,27 @@ void New_random(int **num,int Line,int Col,int Target)
 int Control(int **num,int Line,int Col,int Target)
 {
 	char operation;
-	operation=getch();  /*é”®å…¥æ“ä½œ awsd;*/
+	operation=getch();  /*¼üÈë²Ù×÷ awsd;*/
 	switch(operation){
-		/*å‘å·¦*/
+		/*Ïò×ó*/
         case 75:
 		case 'a':
 		case 'A':
 			Turn_left(num,Line,Col,Target);
 			break;
-		/*å‘å³*/
+		/*ÏòÓÒ*/
 		case 77:
 		case 'd':
 		case 'D':
 		    Turn_right(num,Line,Col,Target);
 		    break;
-		/*å‘ä¸Š*/
+		/*ÏòÉÏ*/
         case 72:
 		case 'w':
 		case 'W':
 			Turn_up(num,Line,Col,Target);
 			break;
-		/*å‘ä¸‹*/
+		/*ÏòÏÂ*/
         case 80:
 		case 's':
 		case 'S':
@@ -169,22 +169,22 @@ int Control(int **num,int Line,int Col,int Target)
 	return 1;
 }
 ///end function 'Control';
-///ç§»åŠ¨æ“ä½œ
+///ÒÆ¶¯²Ù×÷
     void Turn_left(int **num,int Line,int Col,int Target){
         int i,j,temp;
         for(i=1;i<=Line;i++){
             for(j=1;j<=Col;j++){
                 if(!num[i][j])for(temp=j+1;temp<=Col;temp++)if(num[i][temp]){num[i][j]=num[i][temp];num[i][temp]=0;break;}
                 if(!num[i][j])continue;
-                for(temp=j+1;temp<=Col;temp++){     ///è®¾ç½®tempå¾ªç¯ä½œç”¨ï¼šé€ä¸ªtempä¸jæ¯”è¾ƒ
-                    if(!num[i][temp])continue;      ///ç©ºç™½å¤„ç†
+                for(temp=j+1;temp<=Col;temp++){     ///ÉèÖÃtempÑ­»·×÷ÓÃ£ºÖğ¸ötempÓëj±È½Ï
+                    if(!num[i][temp])continue;      ///¿Õ°×´¦Àí
                     if(num[i][j]==num[i][temp]){
                         num[i][j]*=2;num[i][temp]=0;
                         Score+=num[i][j];
-                    break;}                         ///ç›¸åŒæ—¶åˆå¹¶
+                    break;}                         ///ÏàÍ¬Ê±ºÏ²¢
                     else if(temp!=j+1){
                         num[i][j+1]=num[i][temp];num[i][temp]=0;
-                    break;}                         ///ä¸åŒæ—¶ç¢°æ’
+                    break;}                         ///²»Í¬Ê±Åö×²
 		    break;
                 }
             }
@@ -196,15 +196,15 @@ int Control(int **num,int Line,int Col,int Target)
             for(j=Col;j>=1;j--){
                 if(!num[i][j])for(temp=j-1;temp>=1;temp--)if(num[i][temp]){num[i][j]=num[i][temp];num[i][temp]=0;break;}
                 if(!num[i][j])continue;
-                for(temp=j-1;temp>=1;temp--){     ///è®¾ç½®tempå¾ªç¯ä½œç”¨ï¼šé€ä¸ªtempä¸jæ¯”è¾ƒ
-                    if(!num[i][temp])continue;      ///ç©ºç™½å¤„ç†
+                for(temp=j-1;temp>=1;temp--){     ///ÉèÖÃtempÑ­»·×÷ÓÃ£ºÖğ¸ötempÓëj±È½Ï
+                    if(!num[i][temp])continue;      ///¿Õ°×´¦Àí
                     if(num[i][j]==num[i][temp]){
                         num[i][j]*=2;num[i][temp]=0;
                         Score+=num[i][j];
-                    break;}                         ///ç›¸åŒæ—¶åˆå¹¶
+                    break;}                         ///ÏàÍ¬Ê±ºÏ²¢
                     else if(temp!=j-1){
                         num[i][j-1]=num[i][temp];num[i][temp]=0;
-                    break;}                         ///ä¸åŒæ—¶ç¢°æ’
+                    break;}                         ///²»Í¬Ê±Åö×²
 		    break;
                 }
             }
@@ -216,15 +216,15 @@ int Control(int **num,int Line,int Col,int Target)
             for(i=1;i<=Line;i++){
                 if(!num[i][j])for(temp=i+1;temp<=Line;temp++)if(num[temp][j]){num[i][j]=num[temp][j];num[temp][j]=0;break;}
                 if(!num[i][j])continue;
-                for(temp=i+1;temp<=Line;temp++){     ///è®¾ç½®tempå¾ªç¯ä½œç”¨ï¼šé€ä¸ªtempä¸jæ¯”è¾ƒ
-                    if(!num[temp][j])continue;      ///ç©ºç™½å¤„ç†
+                for(temp=i+1;temp<=Line;temp++){     ///ÉèÖÃtempÑ­»·×÷ÓÃ£ºÖğ¸ötempÓëj±È½Ï
+                    if(!num[temp][j])continue;      ///¿Õ°×´¦Àí
                     if(num[i][j]==num[temp][j]){
                         num[i][j]*=2;num[temp][j]=0;
                         Score+=num[i][j];
-                    break;}                         ///ç›¸åŒæ—¶åˆå¹¶
+                    break;}                         ///ÏàÍ¬Ê±ºÏ²¢
                     else if(temp!=i+1){
                         num[i+1][j]=num[temp][j];num[temp][j]=0;
-                    break;}                         ///ä¸åŒæ—¶ç¢°æ’
+                    break;}                         ///²»Í¬Ê±Åö×²
 		    break;
                 }
             }
@@ -236,15 +236,15 @@ int Control(int **num,int Line,int Col,int Target)
             for(i=Line;i>=1;i--){
                 if(!num[i][j])for(temp=i-1;temp>=1;temp--)if(num[temp][j]){num[i][j]=num[temp][j];num[temp][j]=0;break;}
                 if(!num[i][j])continue;
-                for(temp=i-1;temp>=1;temp--){     ///è®¾ç½®tempå¾ªç¯ä½œç”¨ï¼šé€ä¸ªtempä¸jæ¯”è¾ƒ
-                    if(!num[temp][j])continue;      ///ç©ºç™½å¤„ç†
+                for(temp=i-1;temp>=1;temp--){     ///ÉèÖÃtempÑ­»·×÷ÓÃ£ºÖğ¸ötempÓëj±È½Ï
+                    if(!num[temp][j])continue;      ///¿Õ°×´¦Àí
                     if(num[i][j]==num[temp][j]){
                         num[i][j]*=2;num[temp][j]=0;
                         Score+=num[i][j];
-                    break;}                         ///ç›¸åŒæ—¶åˆå¹¶
+                    break;}                         ///ÏàÍ¬Ê±ºÏ²¢
                     else if(temp!=i-1){
                         num[i-1][j]=num[temp][j];num[temp][j]=0;
-                    break;}                         ///ä¸åŒæ—¶ç¢°æ’
+                    break;}                         ///²»Í¬Ê±Åö×²
 		    break;
                 }
             }
@@ -254,78 +254,78 @@ int Control(int **num,int Line,int Col,int Target)
 
 void Print(int **num,int Line,int Col,int Target){
     system("cls");
-    printf("\tâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”è”åˆå‡ºå“ï¼Œä¸ä½œå•†ä¸šç”¨â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”\n\n\n");
-    printf("\t\tä½ çš„åˆ†æ•°æ˜¯ï¼š%4d\n",Score);
-    printf("\n\t\tä½ éœ€è¦åˆå¹¶åˆ°%d\n",Target);
+    printf("\t¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ªÁªºÏ³öÆ·£¬²»×÷ÉÌÒµÓÃ¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª\n\n\n");
+    printf("\t\tÄãµÄ·ÖÊıÊÇ£º%4d\n",Score);
+    printf("\n\t\tÄãĞèÒªºÏ²¢µ½%d\n",Target);
     int i,j;
     ///Head
-    printf("\t\tâ•”");
+    printf("\t\t¨X");
     for(j=1;j<=Col;j++){
-        printf("â•â•â•â•");
-        if(Col-j)   printf("â•¦");
+        printf("¨T¨T¨T¨T");
+        if(Col-j)   printf("¨j");
     }
-    printf("â•—\n");
+    printf("¨[\n");
     ///body
     for(i=1;i<=Line;i++){
         printf("\t\t");
         for(j=1;j<=Col;j++){
-            if(!num[i][j]){printf("â•‘    ");continue;}
-            printf("â•‘%4d",num[i][j]);
+            if(!num[i][j]){printf("¨U    ");continue;}
+            printf("¨U%4d",num[i][j]);
         }
-        printf("â•‘\n\t\t");
+        printf("¨U\n\t\t");
         if(i-Line){
         for(j=1;j<=Col;j++){
-            printf("â•‘â•â•â•â•");
+            printf("¨U¨T¨T¨T¨T");
         }
-        printf("â•‘\n");}
+        printf("¨U\n");}
     }
     ///foot
-    printf("â•š");
+    printf("¨^");
     for(j=1;j<=Col;j++){
-        printf("â•â•â•â•");
-        if(Col-j)   printf("â•©");
+        printf("¨T¨T¨T¨T");
+        if(Col-j)   printf("¨m");
     }
-    printf("â•\n\n\n");
-    printf("\t\tw:â†‘  s:â†“  a:â†  d:â†’");
+    printf("¨a\n\n\n");
+    printf("\t\tw:¡ü  s:¡ı  a:¡û  d:¡ú");
 }
 
 
 /*
 function 'Is_over"
-è¿”å› 0 è¡¨ç¤ºç©ºæ ¼å·²æ»¡ï¼Œæ¸¸æˆç»“æŸï¼›
-è¿”å› 1 è¡¨ç¤ºæœªç»“æŸï¼Œæ¸¸æˆç»§ç»­ï¼›
-è¿”å› 2 è¡¨ç¤ºå‡ºç°æœ€å¤§å€¼2048ï¼Œæ¸¸æˆèƒœåˆ©ï¼Œç»“æŸ
+·µ»Ø 0 ±íÊ¾¿Õ¸ñÒÑÂú£¬ÓÎÏ·½áÊø£»
+·µ»Ø 1 ±íÊ¾Î´½áÊø£¬ÓÎÏ·¼ÌĞø£»
+·µ»Ø 2 ±íÊ¾³öÏÖ×î´óÖµ2048£¬ÓÎÏ·Ê¤Àû£¬½áÊø
 */
 int Is_over(int **num,int Line,int Col,int Target)
 {
-	int i,j;//i ç”±äºè¡Œè®¡æ•°ï¼›j ç”¨äºåˆ—è®¡æ•°///å·å·å«Œå¼ƒä¸€å¥ï¼Œè¿™å‡½æ•°çš„ç©ºè¡Œæ€ä¹ˆè¿™ä¹ˆé•¿å•Šï¼ˆçœ‹ä¸åˆ°æˆ‘çœ‹ä¸åˆ°æˆ‘ï¼‰
+	int i,j;//i ÓÉÓÚĞĞ¼ÆÊı£»j ÓÃÓÚÁĞ¼ÆÊı///ÍµÍµÏÓÆúÒ»¾ä£¬Õâº¯ÊıµÄ¿ÕĞĞÔõÃ´ÕâÃ´³¤°¡£¨¿´²»µ½ÎÒ¿´²»µ½ÎÒ£©
 
-	//è¡Œæ‰«æåˆ¤æ–­
+	//ĞĞÉ¨ÃèÅĞ¶Ï
 	for(j=Col;j>=1;--j){
 		for(i=Line;i>=1;--i){
 
 			if(num[i][j]==Target){
-				return 2;//å‡ºç°Targetï¼Œèƒœåˆ©ï¼Œæ¸¸æˆç»“æŸ
+				return 2;//³öÏÖTarget£¬Ê¤Àû£¬ÓÎÏ·½áÊø
 			}
 
 			else{
 
 				if(num[i][j]==0){
-					return 1;//æ²¡æœ‰2048ä½†ä»æœ‰ç©ºæ ¼ï¼Œæ¸¸æˆç»§ç»­ï¼›
+					return 1;//Ã»ÓĞ2048µ«ÈÔÓĞ¿Õ¸ñ£¬ÓÎÏ·¼ÌĞø£»
 				}
 
 				else{
 					if(num[i][j-1]==num[i][j]){
-				    	return 1;//å·¦è¾¹ç›¸ç­‰æœªç»“æŸçš„æƒ…å†µï¼Œæ¸¸æˆç»§ç»­
+				    	return 1;//×ó±ßÏàµÈÎ´½áÊøµÄÇé¿ö£¬ÓÎÏ·¼ÌĞø
 				    }
 				}
 
 			}
 		}
 	}
-	//è¡Œæ‰«æåˆ¤æ–­ç»“æŸ
+	//ĞĞÉ¨ÃèÅĞ¶Ï½áÊø
 
-	//åˆ—æ‰«æåˆ¤æ–­éƒ¨åˆ†ï¼Œè¯¥éƒ¨åˆ†åªéœ€åˆ¤æ–­ä¸Šé¢çš„æ•°æ˜¯å¦èƒ½åˆå¹¶
+	//ÁĞÉ¨ÃèÅĞ¶Ï²¿·Ö£¬¸Ã²¿·ÖÖ»ĞèÅĞ¶ÏÉÏÃæµÄÊıÊÇ·ñÄÜºÏ²¢
 	for(i=Line;i>=1;--i){
 		for(j=Col;j>=1;--j){
 			if(num[i-1][j]==num[i][j]){
@@ -333,16 +333,22 @@ int Is_over(int **num,int Line,int Col,int Target)
 			}
 		}
 	}
-	 //åˆ—æ‰«æåˆ¤æ–­ç»“æŸéƒ¨åˆ†ç»“æŸ
+	 //ÁĞÉ¨ÃèÅĞ¶Ï½áÊø²¿·Ö½áÊø
 
-	//èƒ½è¿è¡Œåˆ°è¿™é‡Œè¡¨æ˜æ²¡æœ‰ç©ºæ ¼ï¼Œæ²¡æœ‰æœ€å¤§å€¼ï¼Œæ‰€ä»¥è¾“äº†
+	//ÄÜÔËĞĞµ½ÕâÀï±íÃ÷Ã»ÓĞ¿Õ¸ñ£¬Ã»ÓĞ×î´óÖµ£¬ËùÒÔÊäÁË
 	return 0;
 }
 void Lose(){
-    printf("\n\n\t\t YOU LOSE !\n\n");
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // »ñÈ¡¿ØÖÆÌ¨¾ä±ú
+    SetConsoleTextAttribute(handle,FOREGROUND_RED |BACKGROUND_BLUE|BACKGROUND_GREEN|BACKGROUND_RED);// ÉèÖÃÎª»ÆÉ«
+    printf("\n\n\t\t     YOU LOSE !     \n\n");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE| FOREGROUND_RED | FOREGROUND_GREEN);
 }
 void Win(){
-    printf("\n\n\t\t YOU WIN !\n\n");
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // »ñÈ¡¿ØÖÆÌ¨¾ä±ú
+    SetConsoleTextAttribute(handle,FOREGROUND_RED );// ÉèÖÃÎª»ÆÉ«
+    printf("\n\n\t\t     YOU WIN !     \n\n");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE| FOREGROUND_RED | FOREGROUND_GREEN);
 }
 void difficulty_level()
 {
@@ -355,51 +361,51 @@ void difficulty_level()
             printf("\n\n\n\n\n\t\t\t\t\t%s\n\n\t\t\t\t\t%s\n\n\n\n\n","Welcome to 2048game!","Now please choose the difficulty level you want.");
              printf("\t\t\t\t\t");
              if(game2048==1){
-                 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // è·å–æ§åˆ¶å°å¥æŸ„
-                 SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);// è®¾ç½®ä¸ºé»„è‰²
-                 printf("%s é»˜è®¤éš¾åº¦\n\n","Default difficulty");
+                 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // »ñÈ¡¿ØÖÆÌ¨¾ä±ú
+                 SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_GREEN);// ÉèÖÃÎª»ÆÉ«
+                 printf("%s Ä¬ÈÏÄÑ¶È\n\n","Default difficulty");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE| FOREGROUND_RED | FOREGROUND_GREEN);
             }
             else{
-                printf("%s é»˜è®¤éš¾åº¦\n\n","Default difficulty");
+                printf("%s Ä¬ÈÏÄÑ¶È\n\n","Default difficulty");
             }
 
             printf("\t\t\t\t\t");
             if(game2048==2){
-                 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // è·å–æ§åˆ¶å°å¥æŸ„
-                 SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);// è®¾ç½®ä¸ºé»„è‰²
-                 printf("%s è‡ªå®šä¹‰éš¾åº¦\n\n","Custom difficulty");
+                 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // »ñÈ¡¿ØÖÆÌ¨¾ä±ú
+                 SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_GREEN);// ÉèÖÃÎª»ÆÉ«
+                 printf("%s ×Ô¶¨ÒåÄÑ¶È\n\n","Custom difficulty");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE| FOREGROUND_RED | FOREGROUND_GREEN);
             }
             else{
-                printf("%s è‡ªå®šä¹‰éš¾åº¦\n\n","Custom difficulty");
+                printf("%s ×Ô¶¨ÒåÄÑ¶È\n\n","Custom difficulty");
             }
 
 
             printf("\t\t\t\t\t");
             if(game2048==Choice_of_game2048+1){
-                 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // è·å–æ§åˆ¶å°å¥æŸ„
-                 SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);// è®¾ç½®ä¸ºé»„è‰²
-                 printf("é€€å‡º2048æ¸¸æˆ\n\n");
+                 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // »ñÈ¡¿ØÖÆÌ¨¾ä±ú
+                 SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_GREEN);// ÉèÖÃÎª»ÆÉ«
+                 printf("ÍË³ö2048ÓÎÏ·\n\n");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE| FOREGROUND_RED | FOREGROUND_GREEN);
             }
             else{
-                printf("é€€å‡º2048æ¸¸æˆ\n\n");
+                printf("ÍË³ö2048ÓÎÏ·\n\n");
             }
 
             char choose=getch();
             switch(choose){
-            /*å‘ä¸Š*/
+            /*ÏòÉÏ*/
             case 72:
             case 'w':
             case 'W':
                 if(game2048>1)game2048--;
                 break;
-            /*å‘ä¸‹*/
+            /*ÏòÏÂ*/
             case 80:
             case 's':
             case 'S':
-                if(game2048<=Choice_of_game2048+1)game2048++;
+                if(game2048<=Choice_of_game2048)game2048++;
                 break;
             case 13:
                 return;
@@ -420,35 +426,35 @@ void default_difficulty()
 
             printf("\t\t\t\t\t");
             if(Choose_of_de_level==1){
-                 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // è·å–æ§åˆ¶å°å¥æŸ„
-                 SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);// è®¾ç½®ä¸ºé»„è‰²
-                 printf("4è¡Œ4åˆ—\n\n");
+                 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // »ñÈ¡¿ØÖÆÌ¨¾ä±ú
+                 SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_GREEN);// ÉèÖÃÎª»ÆÉ«
+                 printf("4ĞĞ4ÁĞ\n\n");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE| FOREGROUND_RED | FOREGROUND_GREEN);
             }
             else{
-                printf("4è¡Œ4åˆ—\n\n");
+                printf("4ĞĞ4ÁĞ\n\n");
             }
 
             printf("\t\t\t\t\t");
             if(Choose_of_de_level==2){
-                 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // è·å–æ§åˆ¶å°å¥æŸ„
-                 SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);// è®¾ç½®ä¸ºé»„è‰²
-                 printf("8è¡Œ8åˆ—\n\n");
+                 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // »ñÈ¡¿ØÖÆÌ¨¾ä±ú
+                 SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_GREEN);// ÉèÖÃÎª»ÆÉ«
+                 printf("8ĞĞ8ÁĞ\n\n");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE| FOREGROUND_RED | FOREGROUND_GREEN);
             }
             else{
-                printf("8è¡Œ8åˆ—\n\n");
+                printf("8ĞĞ8ÁĞ\n\n");
             }
 
             char choose=getch();
             switch(choose){
-            /*å‘ä¸Š*/
+            /*ÏòÉÏ*/
             case 72:
             case 'w':
             case 'W':
                 if(Choose_of_de_level>1)Choose_of_de_level--;
                 break;
-            /*å‘ä¸‹*/
+            /*ÏòÏÂ*/
             case 80:
             case 's':
             case 'S':
@@ -463,4 +469,3 @@ void default_difficulty()
         }//end while
         return;
     }
-

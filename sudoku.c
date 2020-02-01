@@ -43,22 +43,16 @@ int s_Scan(int m,int n);
 int s_Is_over();
 
 void Sudoku_demo(){
+    system("title 数独");
     system("cls");
     printf("\t\tWelcome!\n\n\t\tChen!");
 
     int i,j;
-    /*给纯哥同学安插代码的地方
 
     //s_Initial();
 
+    s_Print();
 
-
-
-
-
-
-
-    */
     do{
         for(i=1;i<10;i++){
             for(j=1;j<10;j++){
@@ -81,7 +75,7 @@ int s_Scan(int m,int n){
         if(store=su[temp][n])
             s[store]++;
     }
-    ///方快扫描
+    ///方块扫描
     a=(m-1)%3,b=(n-1)%3;
     for(i=1;i<=3;i++)
         for(j=1;j<=3;j++)
@@ -99,8 +93,44 @@ int s_Scan(int m,int n){
             }
         }
     }
+    if(store)   count++;
     return store;
 
 }
 int s_Is_over(){
+}
+
+
+void s_Print(){
+    system("cls");
+    printf("\t———————————联合出品，不作商业用———————————\n\n\n");
+    int i,j;
+    ///Head
+    printf("\t\t╔");
+    for(j=1;j<10;j++){
+        printf("════");
+        if(10-j)   printf("╦");
+    }
+    printf("╗\n");
+    ///body
+    for(i=1;i<=10;i++){
+        printf("\t\t");
+        for(j=1;j<10;j++){
+            if(!su[i][j]){printf("║    ");continue;}
+            printf("║%4d",su[i][j]);
+        }
+        printf("║\n\t\t");
+        if(i-9){
+        for(j=1;j<10;j++){
+            printf("║════");
+        }
+        printf("║\n");}
+    }
+    ///foot
+    printf("\t\t ╚");
+    for(j=1;j<10;j++){
+        printf("════");
+        if(9-j)   printf("╩");
+    }
+    printf("╝\n\n\n");
 }
