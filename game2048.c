@@ -55,7 +55,7 @@ void Game2048()
         printf("\t\t\t建议玩家将行列数设为4的倍数\n");
         printf("\t\t\t将目标值设为行数(Line)除以4的整数部分\n\t\t\t乘以 列数(Col)除以4的整数部分 再乘以512\n\n");
         printf("\t\t\t");
-        printf("%s\n","Of course,you happy is OKKKK!");
+        printf("%s\n\n","Of course,you happy is OKKKK!");
         printf("\t\t\t%s\t","Line:");
         scanf("%d",&Line);
         printf("\n\t\t\t%s\t","Columm:");
