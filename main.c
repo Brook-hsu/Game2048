@@ -46,6 +46,10 @@ int main()
         case 3:
             General();
         break;
+		    
+	    case 4:
+		    Sudoku();
+		    break;
     }
     else break;
     }while(1);
