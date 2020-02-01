@@ -16,7 +16,7 @@
 ///三、小人每移动一次计算一次compute，小人周边八个格变成uncover状态
 ///注意： 方快只有cover到uncover单向改变,cover时显示黑块,uncover时显示数字或空白
 
-short cov[12][12];///有雷标1，无雷标0
+short cov[12][12];///未知标1，已知标0
 short loc[12][12];
 short m_Col=10,m_Line=10;
 short man_i,man_j;
@@ -54,7 +54,8 @@ void m_Print(){
     ///Head
     printf("\t\t╔");
     for(j=1;j<=m_Col;j++)        printf("══");
-    printf("╗\n");
+    printf("╗");
+    printf("\t雷：10个\n");
     ///body
     for(i=1;i<=m_Line;i++){
         printf("\t\t║");
@@ -91,6 +92,7 @@ void m_Initial(){
     srand(time(NULL));
     for(i=0;i<10;i++){
         count=count+rand()%((count<85)?19:5)+1;
+        count=count%100;
         temp_i=count/10+1,temp_j=count%10+1;
         loc[temp_i][temp_j]=9;
         for(j=temp_i-1;j<=temp_i+1;j++)
@@ -171,6 +173,11 @@ int m_Is_over(){
 }
 
 void m_Lose(){
+    int i,j;
+    for(i=1;i<=m_Line;i++)
+        for(j=1;j<=m_Col;j++)
+            if(loc[i][j]>=8)    cov[i][j]=1;
+    m_Print();
     printf("\n\n\t\tYOU LOSE!\n");
 }
 void m_Win(){
