@@ -51,16 +51,16 @@ void Game2048()
     }
     if(game2048==2){
         system("cls");
-        printf("\n\n\n\n\n\t\t\t%s\n","input the number of Line and Column you want");
-        printf("\t\t\t建议玩家将行列数设为4的倍数\n\n");
-        printf("\t\t\t将目标值设为行数(Line)除以4的整数部分\n\t\t\t乘以 列数(Col)除以4的整数部分 再乘以512");
+        printf("\n\n\n\n\n\t\t\t%s\n\n\n","input the number of Line and Column you want");
+        printf("\t\t\t建议玩家将行列数设为4的倍数\n");
+        printf("\t\t\t将目标值设为行数(Line)除以4的整数部分\n\t\t\t乘以 列数(Col)除以4的整数部分 再乘以512\n\n");
         printf("\t\t\t");
-        printf("%s","Of course,you happy is OKKKK!");
+        printf("%s\n","Of course,you happy is OKKKK!");
         printf("\t\t\t%s\t","Line:");
         scanf("%d",&Line);
-        printf("\t\t\t%s\t","Columm:");
+        printf("\n\t\t\t%s\t","Columm:");
         scanf("%d",&Col);
-        printf("\t\t\t%s\t","Target:");
+        printf("\n\t\t\t%s\t","Target:");
         scanf("%d",&Target);
 
     }
