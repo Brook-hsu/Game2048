@@ -24,8 +24,6 @@ void New_random(int **num,int Line,int Col,int Target);
 
 /*判断游戏是否结束*/
 int Is_over(int **num,int Line,int Col,int Target);
-    void Lose();
-    void Win();
 
 void difficulty_level();
 void default_difficulty();
@@ -338,18 +336,7 @@ int Is_over(int **num,int Line,int Col,int Target)
 	//能运行到这里表明没有空格，没有最大值，所以输了
 	return 0;
 }
-void Lose(){
-    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // 获取控制台句柄
-    SetConsoleTextAttribute(handle,FOREGROUND_RED |BACKGROUND_BLUE|BACKGROUND_GREEN|BACKGROUND_RED);// 设置为黄色
-    printf("\n\n\t\t     YOU LOSE !     \n\n");
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE| FOREGROUND_RED | FOREGROUND_GREEN);
-}
-void Win(){
-    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // 获取控制台句柄
-    SetConsoleTextAttribute(handle,FOREGROUND_RED );// 设置为黄色
-    printf("\n\n\t\t     YOU WIN !     \n\n");
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE| FOREGROUND_RED | FOREGROUND_GREEN);
-}
+
 void difficulty_level()
 {
     int Choice_of_game2048=2;

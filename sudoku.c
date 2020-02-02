@@ -31,13 +31,13 @@
 int su[10][10];
 short count;
 
-void s_Print();
+void s_Print(int status,int m,int n);
 void s_Initial();
 void s_Control();
-    void s_Turn_left();
-    void s_Turn_right();
-    void s_Turn_up();
-    void s_Turn_down();
+    int s_Turn_left(int index);
+    int s_Turn_right(int index);
+    int s_Turn_up(int index);
+    int s_Turn_down(int index);
 void s_Input(int m,int n);///新类型函数，用来输入数
 int s_Scan(int m,int n);
 int s_Is_over();
@@ -45,13 +45,12 @@ int s_Is_over();
 void Sudoku_demo(){
     system("title 数独");
     system("cls");
-    printf("\t\tWelcome!\n\n\t\tChen!");
 
     int i,j;
 
     //s_Initial();
+    s_Control();
 
-    s_Print();
 
     do{
         for(i=1;i<10;i++){
@@ -101,7 +100,7 @@ int s_Is_over(){
 }
 
 
-void s_Print(){
+void s_Print(int status,int m,int n){
     system("cls");
     printf("\t———————————联合出品，不作商业用———————————\n\n\n");
     int i,j;
@@ -109,28 +108,101 @@ void s_Print(){
     printf("\t\t╔");
     for(j=1;j<10;j++){
         printf("════");
-        if(10-j)   printf("╦");
+        if(9-j)   printf("╦");
     }
     printf("╗\n");
     ///body
-    for(i=1;i<=10;i++){
+    for(i=1;i<10;i++){
         printf("\t\t");
         for(j=1;j<10;j++){
-            if(!su[i][j]){printf("║    ");continue;}
-            printf("║%4d",su[i][j]);
+            if(!su[i][j])
+                if(i==m&&j==n)
+                    if(status)printf("║  □");
+                    else printf("║    ");
+                else printf("║    ");
+            else printf("║%4d",su[i][j]);
+
+
         }
         printf("║\n\t\t");
-        if(i-9){
+        if(9-i){
         for(j=1;j<10;j++){
             printf("║════");
         }
         printf("║\n");}
     }
     ///foot
-    printf("\t\t ╚");
+    printf("╚");
     for(j=1;j<10;j++){
         printf("════");
         if(9-j)   printf("╩");
     }
     printf("╝\n\n\n");
+}
+
+void s_Input(int m,int n){
+
+
+}
+
+void s_Control(){
+    int cursor_i=1,cursor_j=1;
+    do{
+    s_Print(1,cursor_i,cursor_j);
+
+    char operation=getch();  /*键入操作 awsd;*/
+	switch(operation){
+		/*向左*/
+        case 75:
+		case 'a':
+		case 'A':
+			cursor_j=s_Turn_left(cursor_j);
+			break;
+		/*向右*/
+		case 77:
+		case 'd':
+		case 'D':
+            cursor_j=s_Turn_right(cursor_j);
+		    break;
+		/*向上*/
+        case 72:
+		case 'w':
+		case 'W':
+			cursor_i=s_Turn_up(cursor_i);
+			break;
+		/*向下*/
+        case 80:
+		case 's':
+		case 'S':
+			cursor_i=s_Turn_down(cursor_i);
+			break;
+        case 32:
+            Goto(15+5*cursor_j,2+2*cursor_i);
+            scanf("%d",&su[cursor_i][cursor_j]);
+            getchar();
+		default:
+		    continue;
+	}//end switch
+    }while(1);
+
+
+
+
+
+}
+int s_Turn_left(int index){
+    if(index>1)index--;
+    return index;
+}
+int s_Turn_right(int index){
+    if(index<9)index++;
+    return index;
+}
+int s_Turn_up(int index){
+    if(index>1)index--;
+    return index;
+}
+int s_Turn_down(int index){
+    if(index<9)index++;
+    return index;
 }

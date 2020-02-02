@@ -31,8 +31,6 @@ void m_Control();
     void m_Turn_up();
     void m_Turn_down();
 int m_Is_over();
-void m_Lose();
-void m_Win();
 
 
 void MineSweep(){
@@ -167,19 +165,8 @@ void m_Control(){
     }
 
 int m_Is_over(){
-    if(loc[man_i][man_j]>8){m_Lose(); return 0;}
-    else if(uncover>=90){m_Win();return 0;}
+    if(loc[man_i][man_j]>8){Lose(); return 0;}
+    else if(uncover>=90){Win();return 0;}
     return 1;
 }
 
-void m_Lose(){
-    int i,j;
-    for(i=1;i<=m_Line;i++)
-        for(j=1;j<=m_Col;j++)
-            if(loc[i][j]>=8)    cov[i][j]=1;
-    m_Print();
-    printf("\n\n\t\tYOU LOSE!\n");
-}
-void m_Win(){
-    printf("\n\n\t\tYOU WIN!\n");
-}
