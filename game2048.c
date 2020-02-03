@@ -35,7 +35,7 @@ int game2048;
 
 void Game2048()
 {
-    system("cls");
+    system("title 游戏2048");
     system("color 07");
 
     int Line,Col,Target;
@@ -75,6 +75,7 @@ void Game2048()
     New_random(num,Line,Col,Target);
     New_random(num,Line,Col,Target);//此处照搬原游戏，使得一开始便可生成两个随机数
     int judge=1;
+    system("cls");
     while(judge==1){
         Print(num,Line,Col,Target);
         judge=Is_over(num,Line,Col,Target);
@@ -251,7 +252,8 @@ int Control(int **num,int Line,int Col,int Target)
 
 
 void Print(int **num,int Line,int Col,int Target){
-    system("cls");
+    Goto(1,1);
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);  // 获取控制台句柄
     printf("\t———————————联合出品，不作商业用———————————\n\n\n");
     printf("\t\t你的分数是：%4d\n",Score);
     printf("\n\t\t你需要合并到%d\n",Target);
@@ -267,8 +269,30 @@ void Print(int **num,int Line,int Col,int Target){
     for(i=1;i<=Line;i++){
         printf("\t\t");
         for(j=1;j<=Col;j++){
-            if(!num[i][j]){printf("║    ");continue;}
-            printf("║%4d",num[i][j]);
+            if(!num[i][j])printf("║    ");
+            else {
+                printf("║");
+                if(num[i][j]==2)
+                    color(8);
+                if(num[i][j]==8)
+                    color(14);
+                if(num[i][j]==16)
+                    color(5);
+                if(num[i][j]==32)
+                    color(3);
+                if(num[i][j]==64)
+                    color(10);
+                if(num[i][j]==128)
+                    color(9);
+                if(num[i][j]==256)
+                    color(12);
+                if(num[i][j]==512)
+                    color(13);
+                if(num[i][j]==1024)
+                    color(4);
+                printf("%4d",num[i][j]);
+            }
+            color(7);
         }
         printf("║\n\t\t");
         if(i-Line){

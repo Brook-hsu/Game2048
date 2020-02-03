@@ -48,7 +48,7 @@ void Sudoku_demo(){
 
     int i,j;
 
-    //s_Initial();
+    s_Initial();
     s_Control();
 
 
@@ -58,10 +58,8 @@ void Sudoku_demo(){
                 su[i][j]=s_Scan(i,j);
             }
         }
-
-
     }while(s_Is_over());
-
+    s_Print(0,0,0);
 }
 
 int s_Scan(int m,int n){
@@ -97,8 +95,19 @@ int s_Scan(int m,int n){
 
 }
 int s_Is_over(){
+    if(count==81)return 0;
+    else return 1;
 }
 
+void s_Initial(){
+    int i,j;
+    for(i=1;i<10;i++){
+        for(j=1;j<10;j++){
+            su[i][j]=0;
+        }
+    }
+    count=0;
+}
 
 void s_Print(int status,int m,int n){
     system("cls");
@@ -121,8 +130,6 @@ void s_Print(int status,int m,int n){
                     else printf("¨U    ");
                 else printf("¨U    ");
             else printf("¨U%4d",su[i][j]);
-
-
         }
         printf("¨U\n\t\t");
         if(9-i){
@@ -138,6 +145,7 @@ void s_Print(int status,int m,int n){
         if(9-j)   printf("¨m");
     }
     printf("¨a\n\n\n");
+    printf("count is %d",count);
 }
 
 void s_Input(int m,int n){
@@ -180,6 +188,10 @@ void s_Control(){
             Goto(15+5*cursor_j,2+2*cursor_i);
             scanf("%d",&su[cursor_i][cursor_j]);
             getchar();
+            count++;
+            break;
+        case 13:
+            return;
 		default:
 		    continue;
 	}//end switch

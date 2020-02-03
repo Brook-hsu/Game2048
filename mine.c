@@ -9,7 +9,6 @@
 ///3.雷周边有数字标明
 ///4.胜利条件：小人把雷正确标完或走过所有无雷地区
 ///其他待构想
-
 ///函数构建：分两大块头
 ///一、初始化值，创建十个互异随机数，并计算出每个方快对应数字，并令所有方快处于cover状态0
 ///二、控制小人移动Control，这里比较简单，但注意别移动出界
@@ -35,6 +34,7 @@ int m_Is_over();
 
 void MineSweep(){
     system("title 扫雷");
+    system("cls");
     m_Initial();
     do{
         m_Control();
@@ -46,7 +46,7 @@ void MineSweep(){
 
 void m_Print(){
 
-    system("cls");
+    Goto(1,1);
     printf("\t———————————联合出品，不作商业用———————————\n\n");
     int i,j;
     ///Head
@@ -80,11 +80,9 @@ void m_Initial(){
     system("color 07");
     uncover=0;
     int i,j;
-    for(i=1;i<=m_Line;i++){
-        for(j=1;j<=m_Col;j++){
-            cov[i][j]=0;loc[i][j]=0;
-        }
-    }
+
+    for(i=1;i<=m_Line;i++)  for(j=1;j<=m_Col;j++)   cov[i][j]=0;loc[i][j]=0;
+
     ///定义十个雷，雷是loc>=9
     int count=0,temp_i,temp_j;
     srand(time(NULL));
